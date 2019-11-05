@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<style>
+#div1, #div2, #div3, #div4 {
+  float: left;
+  min-width: 100px;
+  min-height: 35px;
+  margin: 10px;
+  padding: 10px;
+  padding-bottom: 100px;
+  border: 1px solid black;
+  background-color: #efefef;
+}
+.itemdraggable{
+  width: 80px;
+  height: 31px;
+  border: 1px solid red;
+  margin-bottom: 10px;
+  background-color: lime;
+  cursor: pointer;
+}
+</style>
+
+
+<script src="drandrop.js"></script>
+
+
+</head>
+<body id="test">
+
+<div id="div1" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag1">1</div>
+    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag2">2</div>
+    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag3">3</div>
+</div>
+
+<div id="div2" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag4">4</div>
+    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag5">5</div>
+</div>
+
+<div id="div3" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+</div>
+
+<div id="div4" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag6">6</div>
+    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag7">7</div>
+    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag8">8</div>
+</div>
+
+
+
+
+</body>
+</html>
