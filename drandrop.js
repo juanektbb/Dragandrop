@@ -19,8 +19,6 @@ const overDrop = (ev) => {
         thisElement.style.background = "orange";
     }
 
-    
-    
 }
 
 
@@ -35,7 +33,7 @@ const leaveDrop = (ev) => {
 
 //SET 
 function dragStart(ev){
-  ev.dataTransfer.setData("text", ev.target.id);
+  ev.dataTransfer.setData("textaa", ev.target.id);
 }
 
 
@@ -58,7 +56,7 @@ function drop(ev){
     ev.preventDefault();
 
     //This element
-    var data = ev.dataTransfer.getData("text");
+    var data = ev.dataTransfer.getData("textaa");
     var dragged = document.getElementById(data);
 
 
@@ -73,18 +71,11 @@ function drop(ev){
     }
 
 
+    this.sortByAlphabet( dragged.parentNode);
+    //console.log(dragged.parentNode.childNodes);
+   // dragged.className += " dropped";
 
-
-    // if(!arrayOfChanges.includes(data)){
-    //     arrayOfChanges.push(data);
-    // }
-
-    //console.log(arrayOfChanges["aaa"]);
-
-
-    dragged.className += " dropped";
-
-    console.log(arrayOfChanges);
+    //console.log(arrayOfChanges);
 
 }
 
@@ -115,5 +106,60 @@ function highlightTarget(element){
 
 }
 
+
+
+//SORT ELEMENTS OF A PARENT BY ITS INNERTEXT
+function sortByAlphabet(parent){
+
+    let rawArray = [];
+    let newParent = parent.cloneNode(true);
+    let childrenLength = parent.children.length;
+
+
+
+while (newParent.firstChild) {
+    newParent.firstChild.remove();
+}
+
+
+
+    //Go through each children of the parent
+    for(var i = 0; i < childrenLength; i++){
+
+        //Append this child to the raw array for reference
+        rawArray.push({
+            id: parent.children[i].id,
+            innerText: parent.children[i].innerText
+        });
+
+    }
+
+    //Sort the raw array for reference
+    rawArray.sort((a, b) => a.innerText.localeCompare(b.innerText));
+
+    //Go through the raw array
+    for(var j = 0; j < rawArray.length; j++){
+        
+        var thisChild = document.getElementById(rawArray[j].id);
+        newParent.appendChild(thisChild);
+
+    }
+
+
+    parent.innerHTML = '';
+
+    while(newParent.firstChild){
+        parent.appendChild(newParent.firstChild);
+
+    }
+
+
+
+
+
+
+
+
+}
 
 
