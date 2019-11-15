@@ -5,37 +5,52 @@
 <title>Drandrop.js</title>
 
 <link rel="stylesheet" href="styles.css" />
-<script src="drandrop.js"></script>
+
 
 </head>
-<body id="test">
+<body>
 
+<div id="responseToUser"></div>
+<div class="patches-container" id="patches-container">
 
+    <div data-parent-box="unique1" class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+        <div data-child-box="MANAGER1" data-child-header="M1" class="itemdraggable itemHeading" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
 
+        <div data-child-box="BBB" data-child-code="R1" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+        <div data-child-box="VWX" data-child-code="R2" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+        <div data-child-box="YZA" data-child-code="R3" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+    </div>
 
+    <div data-parent-box="unique2" class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+        <div data-child-box="MANAGER2" data-child-header="M2" class="itemdraggable itemHeading" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
 
-<div id="div1" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
-    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag1">AAAA</div>
-    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag2">BA</div>
-    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag3">AA</div>
+        <div data-child-box="STU" data-child-code="R4" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+        <div data-child-box="DEF" data-child-code="R5" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+    </div>
+
+    <div data-parent-box="unique3" class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+        <div data-child-box="MANAGER3" data-child-header="M3" class="itemdraggable itemHeading" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+
+        <div data-child-box="JKL" data-child-code="R6" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+    </div>
+
+    <div data-parent-box="unique4" class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+        <div data-child-box="GHI" data-child-code="R7" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+        <div data-child-box="PQR" data-child-code="R8" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+        <div data-child-box="MNO" data-child-code="R9" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+    </div>
+
 </div>
 
-<div id="div2" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
-    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag4">D</div>
-    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag5">E</div>
-</div>
 
-<div id="div3" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
-</div>
-
-<div id="div4" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
-    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag6">E</div>
-    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag7">F</div>
-    <div class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragend(event)" id="drag8">G</div>
+<div id="save-changes">
+    <button id="saveStructure">Save Structure</button><br>
+    <textarea id="textarea"></textarea>
 </div>
 
 
 
+<script src="drandrop.js"></script>
 
 
 </body>
