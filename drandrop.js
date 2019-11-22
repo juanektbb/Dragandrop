@@ -9,29 +9,66 @@ INSTEAD, IT USES data-child-box (It acts an ID, DONT REPEAT FIELDS)
 
 
 
+var initial = {
+    "R1":{"parentNode":"MANAGER1"},
+    "R2":{"parentNode":"MANAGER1"},
+    "R3":{"parentNode":"MANAGER1"},
+    "R4":{"parentNode":"MANAGER2"},
+    "R5":{"parentNode":"MANAGER2"},
+    "R6":{"parentNode":null},
+    "R7":{"parentNode":null},
+    "R8":{"parentNode":"MANAGER3"},
+    "R9":{"parentNode":"MANAGER3"}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 var jsonBuilder = {};
 
 
 
-
-
 //FILL EACH CHILD BOX AND SORT BY ALPHABET
-function sortFill(){
+function sortFill(parentID){
 
-    let getAllChildren = document.getElementById("patches-container").children;
+    let getAllParents = document.getElementsByClassName(parentID);
 
-    //Populate the innerText with attribute data-child-box
-    for(var i = 0; i < getAllChildren.length; i++){
-        for(var j = 0; j < getAllChildren[i].children.length; j++){
-            getAllChildren[i].children[j].innerText = getAllChildren[i].children[j].getAttribute("data-child-box");
+    //Go through all existing parents in the DOM with that class name
+    for(var k = 0; k < getAllParents.length; k++){
+
+        //All children of this particular parent
+        let getAllChildren = getAllParents[k].children;
+
+        //Populate the innerText with attribute data-child-box
+        for(var i = 0; i < getAllChildren.length; i++){
+            for(var j = 0; j < getAllChildren[i].children.length; j++){
+                getAllChildren[i].children[j].innerText = getAllChildren[i].children[j].getAttribute("data-child-box");
+            }
         }
-    }
 
-    //Sort when is loaded
-    for(var i = 0; i < getAllChildren.length; i++){
-        sortByAlphabet(getAllChildren[i]);
+        //Sort when is loaded
+        for(var i = 0; i < getAllChildren.length; i++){
+            sortByAlphabet(getAllChildren[i]);
+        }
+
     }
 
 }
@@ -57,6 +94,7 @@ function dragStart(ev){
 function drop(ev){
     ev.preventDefault();
 
+    document.getElementById("responseToUser").innerText = ""; //Clear error box
     var allowDropHeader = true;
 
     //GET THE ELEMENT DROPPED
@@ -67,7 +105,7 @@ function drop(ev){
     var whoIsTarget = whoIsThisTarget(ev.target);
 
     //IF THIS DRAGGED ITEM IS A HEADER AND THE TARGET HAS A HEADER ALREADY
-    if(draggedItem.hasAttribute("data-child-header")){
+    if(draggedItem.hasAttribute("data-child-header") && whoIsTarget.parentNode.getAttribute('id') != 'side-container'){
         for(var i = 0; i < whoIsTarget.children.length; i++){
             if(whoIsTarget.children[i].hasAttribute("data-child-header")){
                 allowDropHeader = false;
@@ -79,12 +117,16 @@ function drop(ev){
     //PLACE THE DRAGGED ITEM INTO THE CONTAINER
     if(allowDropHeader){
         whoIsTarget.appendChild(draggedItem);
-        document.getElementById("responseToUser").innerText = "";
         this.sortByAlphabet(whoIsTarget);
 
     //IF THE ITEM CAN NOT BE DROPPED
     }else{
-        document.getElementById("responseToUser").innerText = "You can't set two headers to same box";
+
+        //Show error message if the actual header is different from what it is intended to drop. This discards error message for dropping same item in same box
+        if(whoIsTarget.children[0].getAttribute("data-child-header") != draggedItem.getAttribute("data-child-header")){
+            document.getElementById("responseToUser").innerText = "You can't set two headers to same box";
+        }
+
         whoIsTarget.style.background = "#efefef";
     }
     
@@ -137,7 +179,7 @@ function dragEnd(ev){
 ****************************************/
 
 function whoIsThisTarget(target){
-    return (target.classList.contains("itemdraggable")) ? target.parentNode : target;
+    return (target.hasAttribute('draggable')) ? target.parentNode : target;
 }
 
 
@@ -162,30 +204,41 @@ function highlightTarget(element){
 
 function buildJSON(){
 
-    var thisContainer = document.getElementById("patches-container");
+    jsonBuilder = {};
 
-    //Go through each box container
-    for(var i = 0; i < thisContainer.children.length; i++){
+    var getAllParents = document.getElementsByClassName("patches-container");
 
-        var thisHeader = thisContainer.children[i].getAttribute("data-parent-box");
+    //Go through all existing parents in the DOM with that class name
+    for(var h = 0; h < getAllParents.length; h++){
+        var thisContainer = getAllParents[h]; //Only for improving reading
 
-        //Go through each 
-        for(var j = 0; j < thisContainer.children[i].children.length; j++){
+        //Go through each box container
+        for(var i = 0; i < thisContainer.children.length; i++){
+            var thisHeader = null;  //No header found yet
 
-            if(!thisContainer.children[i].children[j].hasAttribute("data-child-header"))
-            jsonBuilder[thisContainer.children[i].children[j].getAttribute("data-child-code")] = { parentNode: thisHeader};
+            //Go through each element till the header is found and break it
+            for(var j = 0; j < thisContainer.children[i].children.length; j++){
+                if(thisContainer.children[i].children[j].hasAttribute("data-child-header")){
+                    thisHeader = thisContainer.children[i].children[j].getAttribute("data-child-header");
+                    break;
+                }
+            }
 
+            //Go through each element except header and append to JSON
+            for(var j = 0; j < thisContainer.children[i].children.length; j++){
+                if(!thisContainer.children[i].children[j].hasAttribute("data-child-header")){
+                    jsonBuilder[thisContainer.children[i].children[j].getAttribute("data-child-code")] = { 
+                        parentNode: thisHeader,
+                        grandParentNode: thisContainer.getAttribute("data-grandparent") 
+                    };
+                }
+            }
         }
-
     }
 
-
+    console.log(jsonBuilder);
     document.getElementById("textarea").innerHTML = JSON.stringify(jsonBuilder);
 }
-
-
-
-
 
 
 
@@ -194,10 +247,13 @@ function buildJSON(){
 //SORT ELEMENTS OF A PARENT BY ITS INNERTEXT
 function sortByAlphabet(parent){
 
+    // && whoIsTarget.parentNode.getAttribute('id') != 'side-container'
+
     let rawArray = [];
+    let headersArray = [];
     let newParent = parent.cloneNode(true);
     let childrenLength = parent.children.length;
-    let thisHeader;
+    
 
     //Empty the parent copy
     newParent.innerHTML = "";
@@ -222,7 +278,7 @@ function sortByAlphabet(parent){
 
         //If this child is a header
         if(thisChild.hasAttribute("data-child-header")){
-            thisHeader = thisChild;
+            headersArray.push(thisChild);
             continue;
         }
 
@@ -239,13 +295,86 @@ function sortByAlphabet(parent){
         parent.appendChild(newParent.firstChild);
     }
 
-    //Put the header in first place if exists
-    if(thisHeader != null)
-        parent.insertBefore(thisHeader, parent.firstChild);
+    //Put the headers into the container in reverse order
+    if(headersArray.length != 0){
+        for(var i = headersArray.length - 1; i >= 0; i--){
+            parent.insertBefore(headersArray[i], parent.firstChild);
+        }
+    }
 
 }
 
-sortFill();
+
+
+
+
+
+
+
+
+
+//TAKE THE BUTTON AND PLACE ITS VALUE INTO THE CONTAINER PLACE
+function setGrandparent(whatButton){
+    var parent = whatButton.parentNode.parentNode;
+    var brother = parent.children[1];
+
+    brother.setAttribute("data-grandparent", whatButton.value);
+}
+
+
+//GET ALL BUTTONS TO CHANGE GRANDPARENTS, LOOP THEM, SET GRANDPARENTS AND CREATE LISTENERS
+var allSelectButons = document.getElementsByClassName("chooseGrandParent");
+for(var i = 0; i < allSelectButons.length; i++){
+
+    //Set default values
+    setGrandparent(allSelectButons[i]);
+
+    //Create a listener for every change
+    allSelectButons[i].addEventListener("change", function(ev){
+        setGrandparent(this);
+    });
+
+}
+
+
+
+//GET ALL BUTTONS TO ADD NEW PATCH CONTAINER, LOOP THEM
+var addNewPatchContainers = document.getElementsByClassName("addNewPatchContainer");
+for(var i = 0; i < addNewPatchContainers.length; i++){
+
+    console.log(addNewPatchContainers[i]);
+
+    //Create a listener for press
+    addNewPatchContainers[i].addEventListener("click", function(ev){
+
+
+        
+        var parent = this.parentNode.parentNode;
+        var brother = parent.children[1];
+
+        var supportiveDataParent = document.getElementById("supportiveDataParent");
+
+        var newDataParent = supportiveDataParent.cloneNode(true);
+            newDataParent.setAttribute('class', 'dataparentbox');
+            newDataParent.removeAttribute('id');
+
+
+        brother.append(newDataParent);
+
+    });
+
+}
+
+
+
+
+
+
+
+
+sortFill("patches-container");
+sortFill("side-container");
+
 buildJSON();
 
 

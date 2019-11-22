@@ -11,37 +11,109 @@
 <body>
 
 <div id="responseToUser"></div>
-<div class="patches-container" id="patches-container">
+<!---
 
-    <div data-parent-box="unique1" class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
-        <div data-child-box="MANAGER1" data-child-header="M1" class="itemdraggable itemHeading" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+    data-child-box -> It contains the actual data shown in the box (Restaurant name or Manager name). It is also useful for alphabetic order or both (not as unique keys)
 
-        <div data-child-box="BBB" data-child-code="R1" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
-        <div data-child-box="VWX" data-child-code="R2" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
-        <div data-child-box="YZA" data-child-code="R3" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+    data-child-header -> It contains the ID of the manager (Unique field)
+    data-child-code -> It contains the ID of the restaurant (Unique field)
+
+--->
+
+
+
+
+<div id="all-hierarchy">
+
+
+
+    <div class="sub-hierarchy">
+        <div class="patches-header">
+            <select class="chooseGrandParent"> 
+                <option value="Op1">Option 1</option>
+                <option value="Op2" selected="selected">Option 2</option>
+                <option value="Op3">Option 3</option>
+                <button class="addNewPatchContainer">+</button>
+            </select>
+        </div>
+
+        <div class="patches-container" data-grandparent="">
+
+            <div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+                <div data-child-box="MANAGER1" data-child-header="R1" class="itemHeading" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+
+                <div data-child-box="AR1" data-child-code="R1" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+                <div data-child-box="BR2" data-child-code="R2" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+                <div data-child-box="CR3" data-child-code="R3" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+            </div>
+
+            <div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+                <div data-child-box="MANAGER2" data-child-header="M2" class="itemHeading" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+
+                <div data-child-box="DR4" data-child-code="R4" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+                <div data-child-box="ER5" data-child-code="R5" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+            </div>
+
+            <div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+                <div data-child-box="MANAGER3" data-child-header="M3" class="itemHeading" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+                <!-- <buton>click</buton> -->
+                <div data-child-box="FR6" data-child-code="R6" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+            </div>
+
+        </div>
     </div>
 
-    <div data-parent-box="unique2" class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
-        <div data-child-box="MANAGER2" data-child-header="M2" class="itemdraggable itemHeading" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
 
-        <div data-child-box="STU" data-child-code="R4" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
-        <div data-child-box="DEF" data-child-code="R5" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+
+
+
+
+    <div class="sub-hierarchy">
+        <div class="patches-header">
+            <select class="chooseGrandParent"> 
+                <option value="Op1">Option 1</option>
+                <option value="Op2">Option 2</option>
+                <option value="Op3">Option 3</option>
+            </select>
+            <button class="addNewPatchContainer">+</button>
+        </div>
+
+        <div class="patches-container" data-grandparent="">
+            <div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+                <div data-child-box="GR7" data-child-code="R7" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+                <div data-child-box="HR8" data-child-code="R8" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+                <div data-child-box="IR9" data-child-code="R9" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+            </div>
+
+        </div>
     </div>
 
-    <div data-parent-box="unique3" class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
-        <div data-child-box="MANAGER3" data-child-header="M3" class="itemdraggable itemHeading" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
 
-        <div data-child-box="JKL" data-child-code="R6" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
-    </div>
 
-    <div data-parent-box="unique4" class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
-        <div data-child-box="GHI" data-child-code="R7" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
-        <div data-child-box="PQR" data-child-code="R8" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
-        <div data-child-box="MNO" data-child-code="R9" class="itemdraggable" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
-    </div>
 
 </div>
 
+
+<div id="supportiveDataParent" class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+
+
+
+
+<div class="side-title">
+    All elements
+</div>
+
+<div class="side-container" id="side-container">
+    <div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
+        <div data-child-box="JR10" data-child-code="R10" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+        <div data-child-box="KR11" data-child-code="R11" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+        <div data-child-box="LR12" data-child-code="R12" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+    </div>
+</div>
+
+<br>
+<hr>
+<br>
 
 <div id="save-changes">
     <button id="saveStructure">Save Structure</button><br>
