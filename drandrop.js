@@ -7,42 +7,6 @@ INSTEAD, IT USES data-child-box (It acts an ID, DONT REPEAT FIELDS)
 */
 
 
-
-
-var initial = {
-    "R1":{"parentNode":null,"grandParentNode":"Op2"},
-    "R2":{"parentNode":null,"grandParentNode":"Op2"},
-    "R3":{"parentNode":null,"grandParentNode":"Op2"},
-    "R4":{"parentNode":"M2","grandParentNode":"Op2"},
-    "R5":{"parentNode":"M2","grandParentNode":"Op2"},
-    "R9":{"parentNode":"M2","grandParentNode":"Op2"},
-    "R10":{"parentNode":"M2","grandParentNode":"Op2"},
-    "R6":{"parentNode":"M3","grandParentNode":"Op2"},
-    "R7":{"parentNode":null,"grandParentNode":"Op1"},
-    "R8":{"parentNode":null,"grandParentNode":"Op1"}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var jsonBuilder = {};
 
 
@@ -89,7 +53,10 @@ function dragStart(ev){
 function drop(ev){
     ev.preventDefault();
 
-    document.getElementById("responseToUser").innerText = ""; //Clear error box
+    var responseToUser = document.getElementById("responseToUser");
+
+    responseToUser.innerText = ""; //Clear error box
+    responseToUser.style.display = 'none';
     var allowDropHeader = true;
 
     //GET THE ELEMENT DROPPED
@@ -119,7 +86,8 @@ function drop(ev){
 
         //Show error message if the actual header is different from what it is intended to drop. This discards error message for dropping same item in same box
         if(whoIsTarget.children[0].getAttribute("data-child-header") != draggedItem.getAttribute("data-child-header")){
-            document.getElementById("responseToUser").innerText = "You can't set two headers to same box";
+            responseToUser.innerText = "You can't set two headers to same box";
+            responseToUser.style.display = 'block';
         }
 
         whoIsTarget.style.background = "#efefef";
