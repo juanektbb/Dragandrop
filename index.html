@@ -33,8 +33,10 @@
                 <option value="Op1">Option 1</option>
                 <option value="Op2" selected="selected">Option 2</option>
                 <option value="Op3">Option 3</option>
-                <button class="addNewPatchContainer">+</button>
+                
             </select>
+            <button class="addNewPatchContainer">+</button>
+            <button class="removeEmptyPatches">-</button>
         </div>
 
         <div class="patches-container" data-grandparent="">
@@ -76,6 +78,7 @@
                 <option value="Op3">Option 3</option>
             </select>
             <button class="addNewPatchContainer">+</button>
+            <button class="removeEmptyPatches">-</button>
         </div>
 
         <div class="patches-container" data-grandparent="">
@@ -83,6 +86,9 @@
                 <div data-child-box="GR7" data-child-code="R7" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
                 <div data-child-box="HR8" data-child-code="R8" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
                 <div data-child-box="IR9" data-child-code="R9" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+            </div>
+             
+            <div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)">
             </div>
 
         </div>
@@ -94,10 +100,12 @@
 </div>
 
 
+
+
+
+
+
 <div id="supportiveDataParent" class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
-
-
-
 
 <div class="side-title">
     All elements

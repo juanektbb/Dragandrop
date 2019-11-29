@@ -10,15 +10,16 @@ INSTEAD, IT USES data-child-box (It acts an ID, DONT REPEAT FIELDS)
 
 
 var initial = {
-    "R1":{"parentNode":"MANAGER1"},
-    "R2":{"parentNode":"MANAGER1"},
-    "R3":{"parentNode":"MANAGER1"},
-    "R4":{"parentNode":"MANAGER2"},
-    "R5":{"parentNode":"MANAGER2"},
-    "R6":{"parentNode":null},
-    "R7":{"parentNode":null},
-    "R8":{"parentNode":"MANAGER3"},
-    "R9":{"parentNode":"MANAGER3"}
+    "R1":{"parentNode":null,"grandParentNode":"Op2"},
+    "R2":{"parentNode":null,"grandParentNode":"Op2"},
+    "R3":{"parentNode":null,"grandParentNode":"Op2"},
+    "R4":{"parentNode":"M2","grandParentNode":"Op2"},
+    "R5":{"parentNode":"M2","grandParentNode":"Op2"},
+    "R9":{"parentNode":"M2","grandParentNode":"Op2"},
+    "R10":{"parentNode":"M2","grandParentNode":"Op2"},
+    "R6":{"parentNode":"M3","grandParentNode":"Op2"},
+    "R7":{"parentNode":null,"grandParentNode":"Op1"},
+    "R8":{"parentNode":null,"grandParentNode":"Op1"}
 }
 
 
@@ -75,11 +76,6 @@ function sortFill(parentID){
 
 
 
-
-
-
-
-
 /***************************************************
         MAIN FUNCTIONALITY FOR DRAG AND DROP
 ***************************************************/
@@ -88,7 +84,6 @@ function sortFill(parentID){
 function dragStart(ev){
     ev.dataTransfer.setData("thisDataChild", ev.target.getAttribute('data-child-box'));
 }
-
 
 //***** FUNCTIONALITY: PARENT RECEIVES ITEM TO BE DROPPED *****//
 function drop(ev){
@@ -132,7 +127,6 @@ function drop(ev){
     
 }
 
-
 //***** FUNCTIONALITY & STYLES: CHANGE COLOUR WHEN PASSING OVER *****//
 function overDrop(ev){
     ev.preventDefault();
@@ -142,7 +136,6 @@ function overDrop(ev){
     whoIsTarget.style.background = "orange";
 }
 
-
 //***** STYLES: CHANGE COLOUR WHEN PASSING AWAY *****//
 function leaveDrop(ev){
    ev.preventDefault();
@@ -151,7 +144,6 @@ function leaveDrop(ev){
     var whoIsTarget = whoIsThisTarget(ev.target);
     whoIsTarget.style.background = "#efefef";
 }
-
 
 //***** STYLES: CHANGE COLOUR BACK WHEN DROPPING *****//
 function dragEnd(ev){
@@ -166,22 +158,14 @@ function dragEnd(ev){
 }
 
 
-
-
-
-
-
-
-
+// ---------------------------------------------------------------------------- //
 
 /****************************************
             SUPPORT FUNCTIONS
 ****************************************/
-
 function whoIsThisTarget(target){
     return (target.hasAttribute('draggable')) ? target.parentNode : target;
 }
-
 
 function highlightTarget(element){
 
@@ -197,11 +181,9 @@ function highlightTarget(element){
 }
 
 
-
-
-
-
-
+/*******************
+    JSON BUILDER
+*******************/
 function buildJSON(){
 
     jsonBuilder = {};
@@ -241,20 +223,16 @@ function buildJSON(){
 }
 
 
-
-
-
-//SORT ELEMENTS OF A PARENT BY ITS INNERTEXT
+/*************************************
+    SORT ELEMENTS BY ITS INNERTEXT
+*************************************/
 function sortByAlphabet(parent){
-
-    // && whoIsTarget.parentNode.getAttribute('id') != 'side-container'
 
     let rawArray = [];
     let headersArray = [];
     let newParent = parent.cloneNode(true);
     let childrenLength = parent.children.length;
     
-
     //Empty the parent copy
     newParent.innerHTML = "";
 
@@ -305,14 +283,9 @@ function sortByAlphabet(parent){
 }
 
 
-
-
-
-
-
-
-
-
+/***************************************
+    GRAND PARENT - BIGGER CONTAINERS
+***************************************/
 //TAKE THE BUTTON AND PLACE ITS VALUE INTO THE CONTAINER PLACE
 function setGrandparent(whatButton){
     var parent = whatButton.parentNode.parentNode;
@@ -320,7 +293,6 @@ function setGrandparent(whatButton){
 
     brother.setAttribute("data-grandparent", whatButton.value);
 }
-
 
 //GET ALL BUTTONS TO CHANGE GRANDPARENTS, LOOP THEM, SET GRANDPARENTS AND CREATE LISTENERS
 var allSelectButons = document.getElementsByClassName("chooseGrandParent");
@@ -337,28 +309,25 @@ for(var i = 0; i < allSelectButons.length; i++){
 }
 
 
-
-//GET ALL BUTTONS TO ADD NEW PATCH CONTAINER, LOOP THEM
+/**********************************
+    ADD PATCHES TO MAIN PARENTS
+**********************************/
+//GET ALL BUTTONS TO ADD NEW PATCH CONTAINER AND LOOP THEM
 var addNewPatchContainers = document.getElementsByClassName("addNewPatchContainer");
 for(var i = 0; i < addNewPatchContainers.length; i++){
-
-    console.log(addNewPatchContainers[i]);
 
     //Create a listener for press
     addNewPatchContainers[i].addEventListener("click", function(ev){
 
-
-        
         var parent = this.parentNode.parentNode;
         var brother = parent.children[1];
 
         var supportiveDataParent = document.getElementById("supportiveDataParent");
 
+        //Copy the supportive parent (empty template) + its classes and id
         var newDataParent = supportiveDataParent.cloneNode(true);
-            newDataParent.setAttribute('class', 'dataparentbox');
-            newDataParent.removeAttribute('id');
-
-
+        newDataParent.setAttribute('class', 'dataparentbox');
+        newDataParent.removeAttribute('id');
         brother.append(newDataParent);
 
     });
@@ -366,7 +335,35 @@ for(var i = 0; i < addNewPatchContainers.length; i++){
 }
 
 
+/************************************************
+    REMOVE ALL EMPTY PATCHES FROM GRANDPARENT
+************************************************/
+//GET ALL BUTTONS TO REMOVE PATCHES AND LOOP THEM
+var removeEmptyPatches = document.getElementsByClassName("removeEmptyPatches");
+for(var i = 0; i < removeEmptyPatches.length; i++){
 
+    //Create a listener for press
+    removeEmptyPatches[i].addEventListener("click", function(ev){
+
+        var parent = this.parentNode.parentNode;
+        var brother = parent.children[1];
+        var arrayToRemove = [];
+
+        //Go trought each node, find if it is empty and append to array
+        for(var j = 0; j < brother.children.length; j++){
+            if(brother.children[j].children.length == 0){
+                arrayToRemove.push(brother.children[j]);
+            }
+        }
+
+        //Go through array and remove all nodes
+        for(var x = 0; x < arrayToRemove.length; x++){
+            arrayToRemove[x].parentNode.removeChild(arrayToRemove[x]);
+        }
+
+    });
+
+}
 
 
 

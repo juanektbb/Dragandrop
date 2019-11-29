@@ -40,6 +40,7 @@
 }
 
 .dataparentbox{
+    position: relative;
     align-items: flex-start;
     min-width: 200px;
     max-width: 200px;
@@ -139,3 +140,4 @@ textarea{
 #save-changes{
     display: block;
 }
+
