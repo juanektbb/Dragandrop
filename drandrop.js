@@ -9,6 +9,11 @@ INSTEAD, IT USES data-child-box (It acts an ID, DONT REPEAT FIELDS)
 
 var jsonBuilder = {};
 
+var stylesCSS = {
+    "parentBox": "#fff",
+    "hover": "pink",
+    "transferEffect": "5px solid pink"
+}
 
 
 //FILL EACH CHILD BOX AND SORT BY ALPHABET
@@ -90,7 +95,7 @@ function drop(ev){
             responseToUser.style.display = 'block';
         }
 
-        whoIsTarget.style.background = "#efefef";
+        whoIsTarget.style.background = stylesCSS.parentBox;
     }
     
 }
@@ -101,7 +106,7 @@ function overDrop(ev){
 
     //Set the container as its main target
     var whoIsTarget = whoIsThisTarget(ev.target);
-    whoIsTarget.style.background = "orange";
+    whoIsTarget.style.background = stylesCSS.hover;
 }
 
 //***** STYLES: CHANGE COLOUR WHEN PASSING AWAY *****//
@@ -110,7 +115,7 @@ function leaveDrop(ev){
 
     //Set the container as its main target
     var whoIsTarget = whoIsThisTarget(ev.target);
-    whoIsTarget.style.background = "#efefef";
+    whoIsTarget.style.background = stylesCSS.parentBox;
 }
 
 //***** STYLES: CHANGE COLOUR BACK WHEN DROPPING *****//
@@ -120,7 +125,7 @@ function dragEnd(ev){
   let thisElementParent = thisElement.parentNode;
 
   //Make parent default values
-  thisElementParent.style.background = "#efefef";
+  thisElementParent.style.background = stylesCSS.parentBox;
   this.highlightTarget(thisElementParent);
   this.highlightTarget(thisElement);
 }
@@ -138,7 +143,7 @@ function whoIsThisTarget(target){
 function highlightTarget(element){
 
   setTimeout(() => {
-    element.style.outline = "pink 5px solid";
+    element.style.outline = stylesCSS.transferEffect;
     element.style.transition = "0.4s";
   }, 10)
 
@@ -177,10 +182,19 @@ function buildJSON(){
             //Go through each element except header and append to JSON
             for(var j = 0; j < thisContainer.children[i].children.length; j++){
                 if(!thisContainer.children[i].children[j].hasAttribute("data-child-header")){
+
+                    var thisGrandParent = thisContainer.getAttribute("data-grandparent");
+
+                    //If there was not value, make grandparent null
+                    if(thisGrandParent == '')
+                        thisGrandParent = null;
+                    
+                    //Build JSON entry
                     jsonBuilder[thisContainer.children[i].children[j].getAttribute("data-child-code")] = { 
                         parentNode: thisHeader,
-                        grandParentNode: thisContainer.getAttribute("data-grandparent") 
+                        grandParentNode: thisGrandParent 
                     };
+
                 }
             }
         }
@@ -290,7 +304,7 @@ for(var i = 0; i < addNewPatchContainers.length; i++){
         var parent = this.parentNode.parentNode;
         var brother = parent.children[1];
 
-        var supportiveDataParent = document.getElementById("supportiveDataParent");
+        var supportiveDataParent = document.getElementById("parentSupport");
 
         //Copy the supportive parent (empty template) + its classes and id
         var newDataParent = supportiveDataParent.cloneNode(true);

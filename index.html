@@ -10,6 +10,14 @@
 </head>
 <body>
 
+<div id="save-changes">
+    <button id="saveStructure">Save Structure</button><br>
+    <textarea id="textarea"></textarea>
+</div>
+<br>
+<br>
+
+
 <div id="responseToUser"></div>
 <!---
 
@@ -25,55 +33,45 @@
 
 
 
-<!-- HIDDEN SUPPORTIVE ELEMENTS -->
+<!-- HIDDEN SUPPORTIVE GRANDPARENT -->
 <div class="sub-hierarchy " id="grandParentSupport">
     <div class="patches-header">
         <select class="chooseGrandParent"> 
-            <option value="Op1">Option 1</option>
-            <option value="Op2" selected="selected">Option 2</option>
-            <option value="Op3">Option 3</option>
-            
+            <option value=''>Select one</option>           
         </select>
-        <button class="addNewPatchContainer">+</button>
-        <button class="removeEmptyPatches">-</button>
+        <button class="addNewPatchContainer">New area</button>
+        <button class="removeEmptyPatches">Clear empty</button>
     </div>
 
-    <div class="patches-container" data-grandparent="">
-
-    </div>
+    <div class="patches-container" data-grandparent=""></div>
 </div>
 
+<!-- HIDDEN SUPPORTIVE PARENT -->
+<div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)" id="parentSupport"></div>
 
-
-
-<!---->
-<div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)" id="parentSupport">
- 
-</div>
-
-
+<!-- HIDDEN SUPPORTIVE PARENT NODE-->
 <div data-child-box="" data-child-header="" class="itemHeading" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)" id="managerSupport"></div>
+
+<!-- HIDDEN SUPPORTIVE CHILD NODE -->
 <div data-child-box="" data-child-code="" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)" id="childSupport"></div>
 
 
 
+<div class="supercontiner">
 
+    <!-- MAIN CONTAINER -->
+    <div id="all-hierarchy"></div>
 
+    <div id="vl"></div>
 
+    <!-- SIDE CONTAINER -->
+    <div id="all-side">
+        <div class="side-title">All elements</div>
+        <div class="side-container" id="side-container">
+            <div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+        </div>
+    </div>
 
-
-
-
-
-<div id="all-hierarchy"></div>
-
-
-<div id="supportiveDataParent" class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
-
-<div class="side-title">All elements</div>
-
-<div class="side-container" id="side-container">
-    <div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
 </div>
 
 
@@ -83,14 +81,6 @@
 
 
 
-<br>
-<hr>
-<br>
-
-<div id="save-changes">
-    <button id="saveStructure">Save Structure</button><br>
-    <textarea id="textarea"></textarea>
-</div>
 
 
 

@@ -23,20 +23,45 @@ body{
 
 
 
+
+.supercontiner{
+    display: flex;
+    max-width: 1324px;
+    border: 2px solid red;
+    margin: 0 auto;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+
+
 #all-hierarchy{
     background-color: #ECECEF;
     border: 1px solid #676C7F;
     border-radius: 5px;
-    max-width: 1388px;
-    margin: 0 auto;
+    max-width: 1068px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
 }
+
+#vl{
+    border-left: dashed 2px red;
+    margin: 0 10px;
+}
+
+#all-side{
+    min-width: 220px;
+    max-width: 220px;
+    width: 220px;
+
+}
+
+
 .sub-hierarchy{
     border: 1px solid #6474AF; 
     background-color: #EDDFEF;
-    max-width: 442px;
+    max-width: 402px;
     margin: 10px;
     border-radius: 5px 5px 0 0;
 }
@@ -48,7 +73,49 @@ body{
     background-color: #6474AF;
     padding: 5px;
     border-radius: 3px 3px 0 0;
+    text-align: center;
 }
+
+.patches-header select{
+    width: 100%;
+    background-color: #f5f7ff;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    border-radius: 3px;
+    padding: 3px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.addNewPatchContainer{
+    background: #e4f0d3;
+    outline: none;
+    border: 1px solid #72964e;
+    color: #363636;
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 3px;
+    min-width: 80px;
+    max-width: 80px;
+
+}
+.addNewPatchContainer:hover{
+    background-color: #bcdba9;
+}
+
+.removeEmptyPatches{
+    background: #ffdd99;
+    outline: none;
+    border: 1px solid #e0953f;
+    color: #363636;
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 3px;
+    min-width: 80px;
+    max-width: 80px;
+}
+
 
 .patches-container{
     display: flex;
@@ -60,41 +127,43 @@ body{
 .dataparentbox{
     position: relative;
     align-items: flex-start;
-    min-width: 200px;
-    max-width: 200px;
+    min-width: 180px;
+    max-width: 180px;
     min-height: 35px;
     margin: 10px;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     border: 1px solid #8a005a;
     background-color: #fbfbfb;
 }
 
 .dataparentbox div[draggable]{
     display: block;
-    width: 188px;
-    max-width: 188px;
+    overflow: hidden;
+    width: 168px;
+    max-width: 168px;
     margin: 5px;
-    height: 31px;
+    height: 22px;
     border: 1px solid #ffb982;
-    padding: 5px;
-    text-align: center;
+    padding: 2px 5px;
+    text-align: left;
     background-color: #ffdabd;
     cursor: pointer;
 }
 
 .dataparentbox div[draggable].itemHeading{
     background-color: #8a005a;
+    text-align: center;
+    overflow: hidden;
     border: #8a005a;
     color: #fff;
-    width: 198px;
-    max-width: 198px;
+    width: 178px;
+    max-width: 178px;
     margin: 0;
     margin-bottom: 10px;
 }
 
 
 
-#supportiveDataParent{ display: none; }
 
 #grandParentSupport, #parentSupport, #managerSupport, #childSupport{
     display: none;
@@ -115,40 +184,45 @@ body{
 
 
 .side-title{
-    max-width: 1388px;
-    margin: 30px auto 0;
+    width: 100%;
+    margin: 0px auto 0;
     padding: 8px;
     text-align: center;
     font-size: 15px;
-    border: 1px dashed red;
+    border: 1px solid #630041;
     border-bottom: none;
-    border-radius: 6px 6px 0 0;
-    background: #e0e0e0;
+    border-radius: 3px 3px 0 0;
+    background: #630041;
+    color: #fff;
 }
 .side-container{
-    max-width: 1388px;
     margin: 0 auto;
+    width: 100%;
+    height: 100%;
 }
+
+
 
 .side-container .dataparentbox{
-    min-width: 100%;
-    max-width: 100%;
+    width: 220px;
+    min-width: 220px;
     margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    border: 1px dashed red;
-    border-top: none;
-    border-radius: 0 0 6px 6px;
+    border: 1px solid #630041;
+    border-radius: 0 0 3px 3px;
     background: white;
+    min-height: 300px;
 }
 
-.side-container .dataparentbox div[draggable].itemHeading{
-    margin: 5px;
-    width: 188px;
-    max-width: 188px;
+.side-container .dataparentbox div[draggable]{
+    margin: 5px auto;
+    width: 210px;
+    min-width: 210px;
 }
 
+/*.side-container .dataparentbox div[draggable].itemHeading:last-child{
+       background-color: red;
+}
+*/
 
 
 textarea{
