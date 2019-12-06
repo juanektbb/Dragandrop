@@ -96,6 +96,10 @@ body{
 
 #supportiveDataParent{ display: none; }
 
+#grandParentSupport, #parentSupport, #managerSupport, #childSupport{
+    display: none;
+}
+
 
 
 
