@@ -5,20 +5,70 @@
 <title>Drandrop.js</title>
 
 <link rel="stylesheet" href="styles.css" />
-
+<link rel="shortcut icon" type="image/png" href="./favicon.png"/>
 
 </head>
 <body>
 
-<div id="save-changes">
-    <button id="saveStructure">Save Structure</button><br>
-    <textarea id="textarea"></textarea>
-</div>
-<br>
-<br>
+<div class="menu">
+  <ul class="menu-options">
+    <li class="menu-option" id="addGrandParent">Add new grandparent</li>
 
+
+    <li class="menu-option" id="addParent">Add new parent</li>
+    <li class="menu-option">delete this grandparent</li>
+
+    <li class="menu-option">delete this parent</li>
+
+    <li class="menu-option">duplicate this heading</li>
+
+  </ul>
+</div>
+
+<style>
+.menu {
+    width: 120px;
+    background-color: white;
+    box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    z-index: 100;
+    display: none;
+}
+.menu-options {
+    list-style: none;
+
+    padding: 10px 0;
+}
+.menu-option {
+    font-weight: 500;
+    font-size: 14px;
+    display: none;
+    padding: 10px 40px 10px 20px;
+    cursor: pointer;
+}
+
+
+</style>
+
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="close">&times;</div>
+        <p>Some text in the Modal..</p>
+    </div>
+</div>
+
+<div id="save-changes">
+    <button id="saveStructure">Save Structure</button>
+</div>
 
 <div id="responseToUser"></div>
+
+
+
+
+
+
 <!---
 
     data-child-box -> It contains the actual data shown in the box (Restaurant name or Manager name). It is also useful for alphabetic order or both (not as unique keys)
@@ -30,17 +80,14 @@
 
 
 
-
-
-
 <!-- HIDDEN SUPPORTIVE GRANDPARENT -->
 <div class="sub-hierarchy " id="grandParentSupport">
     <div class="patches-header">
         <select class="chooseGrandParent"> 
             <option value=''>Select one</option>           
         </select>
-        <button class="addNewPatchContainer">New area</button>
-        <button class="removeEmptyPatches">Clear empty</button>
+        <button class="addNewPatchContainer">Add area</button>
+        <button class="removeEmptyPatches">Clear areas</button>
     </div>
 
     <div class="patches-container" data-grandparent=""></div>
@@ -62,7 +109,6 @@
     <!-- MAIN CONTAINER -->
     <div id="all-hierarchy"></div>
 
-    <div id="vl"></div>
 
     <!-- SIDE CONTAINER -->
     <div id="all-side">
@@ -99,8 +145,10 @@
 
 
 
-<script src="construct.js"></script>
-<script src="drandrop.js"></script>
+<script src="./scripts/handledata.js"></script>
+<script src="./scripts/construct.js"></script>
+<script src="./scripts/drandrop.js"></script>
+<script src="./scripts/listeners.js"></script>
 
 </body>
 </html>

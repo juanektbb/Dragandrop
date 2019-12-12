@@ -7,6 +7,29 @@ body{
     background-color: #f9f9f9;
 }
 
+
+#save-changes{
+    display: block;
+    margin: 0 auto 10px;
+}
+#save-changes button{
+    width: 200px;
+    max-width: 200px;
+    min-width: 200px;
+    background-color: #fbfbfb;
+    border: 1px solid #c6c6c6;
+    cursor: pointer;
+    color: #565656;
+    font-size: 13px;
+    border-radius: 3px;
+    padding: 8px;
+    margin-left: calc( 50% - 100px);
+    outline: none;
+}
+#save-changes button:hover{
+    background-color: #f0f0f0;
+}
+
 #responseToUser{
     display: none;
     max-width: 1388px;
@@ -27,42 +50,39 @@ body{
 .supercontiner{
     display: flex;
     max-width: 1324px;
-    border: 2px solid red;
+    background-color: #f1f1f1;
+    border: 1px solid #676C7F;
     margin: 0 auto;
     justify-content: space-between;
-    padding: 5px;
+    padding: 8px;
 }
 
-
-
 #all-hierarchy{
-    background-color: #ECECEF;
-    border: 1px solid #676C7F;
+    background-color: #fafafa;
+    border: 1px solid #d1d1d1;
     border-radius: 5px;
-    max-width: 1068px;
+    max-width: 1056px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-#vl{
-    border-left: dashed 2px red;
-    margin: 0 10px;
+#all-hierarchy:hover:not(.sub-hierarchy ){
+    background-color: #eaeaea;
 }
 
 #all-side{
     min-width: 220px;
     max-width: 220px;
     width: 220px;
-
 }
 
 
 .sub-hierarchy{
     border: 1px solid #6474AF; 
-    background-color: #EDDFEF;
+    background-color: #f0f7ff;
     max-width: 402px;
-    margin: 10px;
+    margin: 8px;
     border-radius: 5px 5px 0 0;
 }
 
@@ -78,42 +98,47 @@ body{
 
 .patches-header select{
     width: 100%;
-    background-color: #f5f7ff;
+    background-color: #fff;
     border: none;
     outline: none;
     font-weight: bold;
     border-radius: 3px;
-    padding: 3px;
+    padding: 4px 4px;
     margin-bottom: 5px;
     display: block;
 }
-
 .addNewPatchContainer{
-    background: #e4f0d3;
+    background-color: #fff;
+    border: 1px solid #fff;
+    color: #6474AF;
+    font-size: 11px;
     outline: none;
-    border: 1px solid #72964e;
-    color: #363636;
     cursor: pointer;
-    padding: 3px 5px;
+    padding: 1px 5px;
     border-radius: 3px;
     min-width: 80px;
     max-width: 80px;
-
 }
 .addNewPatchContainer:hover{
-    background-color: #bcdba9;
+    background-color: #e2f7d5;
+    border-color: #e2f7d5;
 }
-
 .removeEmptyPatches{
-    background: #ffdd99;
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 11px;
     outline: none;
-    border: 1px solid #e0953f;
-    color: #363636;
     cursor: pointer;
-    padding: 3px 5px;
+    padding: 1px 5px;
     border-radius: 3px;
     min-width: 80px;
     max-width: 80px;
+}
+.removeEmptyPatches:hover{
+    background-color: #ffcccc;
+    border-color: #ffcccc;
+    color: #6474AF;
 }
 
 
@@ -121,7 +146,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #EDDFEF;
+    background-color: #f0f7ff;
 }
 
 .dataparentbox{
@@ -131,17 +156,19 @@ body{
     max-width: 180px;
     min-height: 35px;
     margin: 10px;
+    padding: 3px;
     padding-bottom: 20px;
-    border: 1px solid #8a005a;
-    background-color: #fbfbfb;
+    border: 1px dashed #8a005a;
+    background-color: #fff;
 }
 
 .dataparentbox div[draggable]{
     display: block;
     overflow: hidden;
-    width: 168px;
-    max-width: 168px;
-    margin: 5px;
+    width: 95%;
+    min-width: 95%;
+    max-width: 95%;
+    margin: 5px auto 0;
     height: 22px;
     border: 1px solid #ffb982;
     padding: 2px 5px;
@@ -149,17 +176,17 @@ body{
     background-color: #ffdabd;
     cursor: pointer;
 }
-
 .dataparentbox div[draggable].itemHeading{
     background-color: #8a005a;
     text-align: center;
     overflow: hidden;
     border: #8a005a;
     color: #fff;
-    width: 178px;
-    max-width: 178px;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
     margin: 0;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 
@@ -207,31 +234,56 @@ body{
     width: 220px;
     min-width: 220px;
     margin: 0;
-    border: 1px solid #630041;
+    border: 1px dashed #8a005a;
+    border-top-style: solid;
     border-radius: 0 0 3px 3px;
     background: white;
     min-height: 300px;
+    height: 100%;
+    max-height: calc(100% - 35px);
 }
-
 .side-container .dataparentbox div[draggable]{
     margin: 5px auto;
     width: 210px;
     min-width: 210px;
 }
 
-/*.side-container .dataparentbox div[draggable].itemHeading:last-child{
-       background-color: red;
+
+
+
+/* MODAL INFO */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.75);
 }
-*/
-
-
-textarea{
-    width: 100%;
-    height: 80px;
-    resize: none;
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; 
+    position: relative;
 }
-
-#save-changes{
-    display: block;
+.close {
+    color: #aaa;
+    font-size: 28px;
+    line-height: 10px;
+    font-weight: bold;
+    position: absolute;
+    top: 7px;
+    right: 5px;
+    padding: 0;
 }
-
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
