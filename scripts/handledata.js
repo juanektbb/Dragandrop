@@ -378,6 +378,7 @@ var rawData = {
 
 
 
+
 /****************************************************************
         BUTTONS AND FUNCTIONALY FOR EVERY ELEMENT OF MENU
 ****************************************************************/
@@ -427,11 +428,7 @@ buttonDeleteGrandParent.addEventListener("click", function(e){
 
     //If the grandparent was not empty
     if(!bool){
-        var responseToUser = document.getElementById("responseToUser");
-        responseToUser.innerText = "You can't remove this grandparent if still has data in it";
-        responseToUser.style.display = 'block';
-        
-    //Delete grandparent if was empty
+        createResponse("You can't remove this grandparent if still has data in it");
     }else{
         whoIsNewTarget.parentNode.remove();
     }
@@ -443,11 +440,7 @@ buttonDeleteParent.addEventListener("click", function(e){
 
     //If this parent was not empty
     if(whoIsNewTarget.children.length > 0){
-        var responseToUser = document.getElementById("responseToUser");
-        responseToUser.innerText = "You can't remove this parent if still has data in it";
-        responseToUser.style.display = 'block';
-        
-    //Delete grandparent if was empty
+        createResponse("You can't remove this parent if still has data in it");
     }else{
         whoIsNewTarget.remove();
     }
@@ -540,13 +533,16 @@ supercontiner.addEventListener("contextmenu", e => {
     }
 
     //CLICK INSIDE OF A GRANDPARENT
-    if(e.target.classList.contains('patches-container') || e.target.classList.contains('sub-hierarchy')){
+    if(e.target.classList.contains('patches-container') || e.target.classList.contains('sub-hierarchy') || e.target.classList.contains('patches-header')){
         e.preventDefault();
 
         //Find the correct target
         var getPatchesContainer = e.target;
         if(e.target.classList.contains('sub-hierarchy')){
             getPatchesContainer = e.target.querySelector(".patches-container");
+        }
+        if(e.target.classList.contains('patches-header')){
+            getPatchesContainer = e.target.parentNode.querySelector(".patches-container");
         }
 
         //Display correct target

@@ -52,10 +52,7 @@ function dragStart(ev){
 function drop(ev){
     ev.preventDefault();
 
-    var responseToUser = document.getElementById("responseToUser");
-
-    responseToUser.innerText = ""; //Clear error box
-    responseToUser.style.display = 'none';
+    this.clearResponse();
     var allowDropHeader = true;
 
     //GET THE ELEMENT DROPPED
@@ -88,8 +85,7 @@ function drop(ev){
 
             //Show error message if the actual header is different from what it is intended to drop. This discards error message for dropping same item in same box
             if(whoIsTarget.children[0].getAttribute("data-child-header") != draggedItem.getAttribute("data-child-header")){
-                responseToUser.innerText = "You can't set two headers to same box";
-                responseToUser.style.display = 'block';
+                this.createResponse("You can't set two headers to same box");
             }
 
             this.hoverOff(whoIsTarget);
@@ -118,7 +114,6 @@ function leaveDrop(ev){
 
 //***** STYLES: CHANGE COLOUR BACK WHEN DROPPING *****//
 function dragEnd(ev){
-
   let thisElement = ev.target;
   let thisElementParent = thisElement.parentNode;
 
@@ -160,14 +155,6 @@ function whoIsThisTarget(target){
     return (target.hasAttribute('draggable')) ? target.parentNode : target;
 }
 
-function doubleCheckTarget(target){
-    if((target.hasAttribute('draggable'))){
-        return 
-    }else{
-
-    }
-}
-
 function highlightTarget(element){
 
   setTimeout(() => {
@@ -180,6 +167,21 @@ function highlightTarget(element){
     element.style.transition = "0s";
   }, 400)
 
+}
+
+
+function createResponse(text){
+    var responseToUser = document.getElementById("responseToUser");
+    responseToUser.innerText = text;
+    responseToUser.style.display = 'block';
+    responseToUser.scrollIntoView({behavior: 'smooth'});
+    responseToUser.scrollTop += 10;
+}
+
+function clearResponse(){
+    var responseToUser = document.getElementById("responseToUser");
+    responseToUser.innerText = "";
+    responseToUser.style.display = 'none';
 }
 
 
