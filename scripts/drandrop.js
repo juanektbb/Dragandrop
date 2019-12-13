@@ -12,13 +12,17 @@ build: 3167
 
 var jsonBuilder = {};
 
+
+
+/***************************
+    STYLES FUNCTIONALITY
+***************************/
 var stylesCSS = {
     "bgParentBox": "#fff",
     "bgHoverParentBox": "#fff",
     "borderOn": "2px dashed #8a005a",
     "borderOff": "1px dashed #8a005a",
     "borderTopSyleNone" : "none",
-
     "transferEffect": "5px solid pink"
 }
 
@@ -31,7 +35,23 @@ function animateEaseOut(elem){
     elem.style.transform = "scale(1)";
 }
 
+function hoverOn(thisElement){
+    thisElement.style.border = stylesCSS.borderOn;
+    thisElement.style.background = stylesCSS.bgHoverParentBox;
 
+    // if(thisElement.parentNode.id == "side-container"){
+    //      thisElement.style.borderTopStyle = stylesCSS.borderTopSyleNone; 
+    // }
+}
+function hoverOff(thisElement){
+    thisElement.style.background = stylesCSS.bgParentBox;
+    thisElement.style.border = stylesCSS.borderOff;
+    thisElement.style.transition = "0.1s"; //Improve animation effect
+
+    if(thisElement.parentNode.id == "side-container"){
+        thisElement.style.borderTopStyle = stylesCSS.borderTopSyleNone; 
+    }
+}
 
 
 // ---------------------------------------------------------------------------- //
@@ -128,25 +148,7 @@ function dragEnd(ev){
 
 // ---------------------------------------------------------------------------- //
 
-function hoverOn(thisElement){
-    thisElement.style.border = stylesCSS.borderOn;
-    thisElement.style.background = stylesCSS.bgHoverParentBox;
 
-    if(thisElement.parentNode.id == "side-container"){
-        // thisElement.style.borderTopStyle = stylesCSS.borderTopSyleNone; 
-    }
-}
-
-function hoverOff(thisElement){
-    thisElement.style.background = stylesCSS.bgParentBox;
-    thisElement.style.border = stylesCSS.borderOff;
-    thisElement.style.transition = "0.1s"; //Improve animation effect
-
-
-    if(thisElement.parentNode.id == "side-container"){
-        thisElement.style.borderTopStyle = stylesCSS.borderTopSyleNone; 
-    }
-}
 
 /****************************************
             SUPPORT FUNCTIONS
