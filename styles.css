@@ -1,7 +1,7 @@
 *{
     box-sizing: border-box;
-    font-family: "Calibri", sans-serif;
-    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
 }
 body{
     background-color: #f9f9f9;
@@ -67,9 +67,7 @@ body{
     justify-content: center;
 }
 
-#all-hierarchy:hover:not(.sub-hierarchy ){
-    background-color: #eaeaea;
-}
+
 
 #all-side{
     min-width: 220px;
@@ -84,6 +82,7 @@ body{
     max-width: 402px;
     margin: 8px;
     border-radius: 5px 5px 0 0;
+    min-height: 200px;
 }
 
 
@@ -207,9 +206,7 @@ body{
 
 
 
-/* SIDE PARENT */
-
-
+/* SIDE CONTAINER */
 .side-title{
     width: 100%;
     margin: 0px auto 0;
@@ -226,6 +223,7 @@ body{
     margin: 0 auto;
     width: 100%;
     height: 100%;
+    background-color: red;
 }
 
 
@@ -241,12 +239,48 @@ body{
     min-height: 300px;
     height: 100%;
     max-height: calc(100% - 35px);
+    background-color: blue;
 }
 .side-container .dataparentbox div[draggable]{
     margin: 5px auto;
     width: 210px;
     min-width: 210px;
 }
+
+
+
+
+/* RIGHT CLICK MENU */
+.menu{
+    max-width: 200px;
+    z-index: 100;
+    background-color: white;
+    box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    display: none;
+    border-radius: 3px;
+}
+.menu-options{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.menu-option{
+    font-size: 13px;
+    display: none;
+    padding: 6px 12px;
+    cursor: default;
+    border-top: #f0f0f0 1px solid;
+    border-bottom: #f0f0f0 1px solid;
+}
+.menu-option:hover{
+    background-color: #f0f0f0;
+}
+
+
+
+
+
 
 
 

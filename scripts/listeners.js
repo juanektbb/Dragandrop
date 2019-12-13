@@ -69,17 +69,22 @@ function setGrandparent(whatButton){
     brother.setAttribute("data-grandparent", whatButton.value);
 }
 
-//GET ALL BUTTONS TO CHANGE GRANDPARENTS, LOOP THEM, SET GRANDPARENTS AND CREATE LISTENERS
-var allSelectButons = document.getElementsByClassName("chooseGrandParent");
-for(var i = 0; i < allSelectButons.length; i++){
-
-    //Set default values
-    setGrandparent(allSelectButons[i]);
-
-    //Create a listener for every change
-    allSelectButons[i].addEventListener("change", function(ev){
+//This function is also used when dynamically adds grandparents
+function createListenerGP(selectTarget){
+    selectTarget.addEventListener("change", function(ev){
         setGrandparent(this);
     });
+}
+
+//GET ALL BUTTONS TO CHANGE GRANDPARENTS, LOOP THEM, SET GRANDPARENTS AND CREATE LISTENERS
+var allSelectButtons = document.getElementsByClassName("chooseGrandParent");
+for(var i = 0; i < allSelectButtons.length; i++){
+
+    //Set default values
+    this.setGrandparent(allSelectButtons[i]);
+
+    //Create a listener for every change
+    this.createListenerGP(allSelectButtons[i]);
 
 }
 
@@ -87,25 +92,27 @@ for(var i = 0; i < allSelectButons.length; i++){
 /**********************************
     ADD PATCHES TO MAIN PARENTS
 **********************************/
+//This function is also used when dynamically adds a parent
+function createListenerPC(button){
+
+    //Create a listener for click
+    button.addEventListener("click", function(ev){
+        var parent = this.parentNode.parentNode;
+        var brother = parent.children[1];
+
+        var newDataParent = returnNewNode("parentSupport");
+        newDataParent.setAttribute('class', 'dataparentbox');
+        brother.append(newDataParent);
+    });
+
+}
+
 //GET ALL BUTTONS TO ADD NEW PATCH CONTAINER AND LOOP THEM
 var addNewPatchContainers = document.getElementsByClassName("addNewPatchContainer");
 for(var i = 0; i < addNewPatchContainers.length; i++){
 
     //Create a listener for press
-    addNewPatchContainers[i].addEventListener("click", function(ev){
-
-        var parent = this.parentNode.parentNode;
-        var brother = parent.children[1];
-
-        var supportiveDataParent = document.getElementById("parentSupport");
-
-        //Copy the supportive parent (empty template) + its classes and id
-        var newDataParent = supportiveDataParent.cloneNode(true);
-        newDataParent.setAttribute('class', 'dataparentbox');
-        newDataParent.removeAttribute('id');
-        brother.append(newDataParent);
-
-    });
+    this.createListenerPC(addNewPatchContainers[i]);
 
 }
 
@@ -113,13 +120,10 @@ for(var i = 0; i < addNewPatchContainers.length; i++){
 /************************************************
     REMOVE ALL EMPTY PATCHES FROM GRANDPARENT
 ************************************************/
-//GET ALL BUTTONS TO REMOVE PATCHES AND LOOP THEM
-var removeEmptyPatches = document.getElementsByClassName("removeEmptyPatches");
-for(var i = 0; i < removeEmptyPatches.length; i++){
+//This function is also used when dynamically remove parents
+function createListenerRP(button){
 
-    //Create a listener for press
-    removeEmptyPatches[i].addEventListener("click", function(ev){
-
+    button.addEventListener("click", function(ev){
         var parent = this.parentNode.parentNode;
         var brother = parent.children[1];
         var arrayToRemove = [];
@@ -135,8 +139,16 @@ for(var i = 0; i < removeEmptyPatches.length; i++){
         for(var x = 0; x < arrayToRemove.length; x++){
             arrayToRemove[x].parentNode.removeChild(arrayToRemove[x]);
         }
-
     });
+
+}
+
+//GET ALL BUTTONS TO REMOVE PATCHES AND LOOP THEM
+var removeEmptyPatches = document.getElementsByClassName("removeEmptyPatches");
+for(var i = 0; i < removeEmptyPatches.length; i++){
+
+    //Create a listener for press
+    this.createListenerRP(removeEmptyPatches[i]);
 
 }
 

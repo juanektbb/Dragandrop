@@ -6,46 +6,23 @@
 
 <link rel="stylesheet" href="styles.css" />
 <link rel="shortcut icon" type="image/png" href="./favicon.png"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
 </head>
 <body>
 
 <div class="menu">
-  <ul class="menu-options">
-    <li class="menu-option" id="addGrandParent">Add new grandparent</li>
-
-
-    <li class="menu-option" id="addParent">Add new parent</li>
-    <li class="menu-option">delete this grandparent</li>
-
-    <li class="menu-option">delete this parent</li>
-
-    <li class="menu-option">duplicate this heading</li>
-
-  </ul>
+    <ul class="menu-options">
+        <li class="menu-option" id="addGrandParent">New regional manager</li>
+        <li class="menu-option" id="addParent">New area manager</li>
+        <li class="menu-option" id="deleteGrandParent">Delete this regional manager</li>
+        <li class="menu-option" id="deleteParent">Delete this area manager</li>
+        <li class="menu-option" id="duplicateHeading">Duplicate this area manager</li>
+    </ul>
 </div>
 
 <style>
-.menu {
-    width: 120px;
-    background-color: white;
-    box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
-    position: absolute;
-    z-index: 100;
-    display: none;
-}
-.menu-options {
-    list-style: none;
 
-    padding: 10px 0;
-}
-.menu-option {
-    font-weight: 500;
-    font-size: 14px;
-    display: none;
-    padding: 10px 40px 10px 20px;
-    cursor: pointer;
-}
 
 
 </style>
@@ -112,7 +89,7 @@
 
     <!-- SIDE CONTAINER -->
     <div id="all-side">
-        <div class="side-title">All elements</div>
+        <div class="side-title">Not classified</div>
         <div class="side-container" id="side-container">
             <div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
         </div>

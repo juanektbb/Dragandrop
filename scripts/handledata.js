@@ -271,9 +271,9 @@ var rawData = {
     "8903":{"parentNode":"55","grandParentNode":"52"},
     "8950":{"parentNode":"61","grandParentNode":"52"},
     "8951":{"parentNode":"3","grandParentNode":"52"},
-    "10001":{"parentNode":"53","grandParentNode":"43"},
-    "10002":{"parentNode":"53","grandParentNode":"43"},
-    "10003":{"parentNode":"53","grandParentNode":"43"},
+    "10001":{"parentNode":"17","grandParentNode":"43"},
+    "10002":{"parentNode":"17","grandParentNode":"43"},
+    "10003":{"parentNode":"17","grandParentNode":"43"},
     "10744":{"parentNode":"3","grandParentNode":"52"},
     "11539":{"parentNode":"19","grandParentNode":"50"},
     "11662":{"parentNode":"17","grandParentNode":"34"},
@@ -376,114 +376,216 @@ var rawData = {
 
 
 
+
+
+/****************************************************************
+        BUTTONS AND FUNCTIONALY FOR EVERY ELEMENT OF MENU
+****************************************************************/
 var whoIsNewTarget = null;
 
-
+//Create new member of the family
 function appendNewFamilyMember(whichSupport){
-    var newGrandParent = returnNewNode(whichSupport);
-    whoIsNewTarget.append(newGrandParent);
+    var familyMember = returnNewNode(whichSupport);
+    whoIsNewTarget.append(familyMember);
+    return familyMember;
 }
 
-/* ----- */
-
+//BUTTON AND FUNCTIONALY FOR ADDING GRANDPARENT
 var buttonAddGrandParent = document.getElementById("addGrandParent");
 buttonAddGrandParent.addEventListener("click", function(e){
-    appendNewFamilyMember("grandParentSupport");
+    var theNewGrandParent = appendNewFamilyMember("grandParentSupport");
+
+    //CREATE LISTENERS FOR EVERY BUTTON OF THE GRANDPARENT
+    var thisSelectElem = theNewGrandParent.querySelector(".chooseGrandParent");
+    createListenerGP(thisSelectElem);
+
+    var thisAddElem = theNewGrandParent.querySelector(".addNewPatchContainer");
+    createListenerPC(thisAddElem);
+
+    var thisRemElem = theNewGrandParent.querySelector(".removeEmptyPatches");
+    createListenerRP(thisRemElem);
 });
 
+//BUTTON AND FUNCTIONALY FOR ADDING PARENT
 var buttonAddParent = document.getElementById("addParent");
 buttonAddParent.addEventListener("click", function(e){
     appendNewFamilyMember("parentSupport");
 });
 
-
-
-
-
-
-var menu = document.querySelector(".menu");
-  
-let menuVisible = false;
-
-
-
-function appendToMenu(type){
-
-    if(type == "menu1"){
-
+//BUTTON AND FUNCTIONALY FOR DELETING GRANDPARENT
+var buttonDeleteGrandParent = document.getElementById("deleteGrandParent");
+buttonDeleteGrandParent.addEventListener("click", function(e){
+    var bool = true;
+   
+    //Find out if the container is empty
+    for(var i = 0; i < whoIsNewTarget.children.length; i++){
+        if(whoIsNewTarget.children[i].children.length > 0){
+            bool = false;
+            break;
+        }
     }
 
-}
+    //If the grandparent was not empty
+    if(!bool){
+        var responseToUser = document.getElementById("responseToUser");
+        responseToUser.innerText = "You can't remove this grandparent if still has data in it";
+        responseToUser.style.display = 'block';
+        
+    //Delete grandparent if was empty
+    }else{
+        whoIsNewTarget.parentNode.remove();
+    }
+});
+
+//BUTTON AND FUNCTIONALY FOR DELETING PARENT
+var buttonDeleteParent = document.getElementById("deleteParent");
+buttonDeleteParent.addEventListener("click", function(e){
+
+    //If this parent was not empty
+    if(whoIsNewTarget.children.length > 0){
+        var responseToUser = document.getElementById("responseToUser");
+        responseToUser.innerText = "You can't remove this parent if still has data in it";
+        responseToUser.style.display = 'block';
+        
+    //Delete grandparent if was empty
+    }else{
+        whoIsNewTarget.remove();
+    }
+
+});
+
+//BUTTON AND FUNCTIONALY FOR DUPLICATING A HEADING
+var buttonDuplicateHeading = document.getElementById("duplicateHeading");
+buttonDuplicateHeading.addEventListener("click", function(e){
+    
+    var whereToAppend = document.querySelector("#side-container .dataparentbox");
+    var newNodeHeading = whoIsNewTarget.cloneNode(true);
+    whereToAppend.append(newNodeHeading);
+
+});
 
 
-function toggleMenu (command) {
-  menu.style.display = command === "show" ? "block" : "none";
+/**************************************
+    VITAL MENU SUPPORTIVE FUNCTIONS
+**************************************/
+var menu = document.querySelector(".menu");
+let menuVisible = false;
+
+function toggleMenu(command) {
+  menu.style.display = (command == "show") ? "block" : "none";
   menuVisible = !menuVisible;
 };
 
-function setPosition( top, left ){
-
+function setPosition(top, left){
     var aleft= left + "px";
     var atop = top + "px";
 
     menu.style.left = aleft;
     menu.style.top = atop;
-    menu.innerHMTL = "aaw";
     toggleMenu("show");
-
 };
 
 window.addEventListener("click", e => {
-  if(menuVisible)toggleMenu("hide");
+    toggleMenu("hide");
 });
 
 
+/**************************************************
+        RIGHT CLICK ON SCREEN FUNCTIONALITY
+**************************************************/
+function showOptions(type){
+    //Hide all the options from the dropdown menu
+    var menuOption = document.getElementsByClassName("menu-option");
+    for(i = 0; i < menuOption.length; i++){
+        menuOption[i].style.display = "none";
+    }
+
+    //Display the correct options of the menu
+    if(type == "allHierarchy"){
+        buttonAddGrandParent.style.display = "block";
+
+    }else if(type == "patchesContainer"){
+        buttonAddParent.style.display = "block";
+        buttonDeleteGrandParent.style.display = "block";
+
+    }else if(type == "dataParentBox"){
+        buttonDeleteParent.style.display = "block";
+
+    }else if(type == "itemHeading"){
+        buttonDuplicateHeading.style.display = "block";
+    }
+}
+
+//MAIN FUNCTION TO DETECT RIGHT CLICK
 var supercontiner = document.getElementsByClassName("supercontiner")[0];
 supercontiner.addEventListener("contextmenu", e => {
 
+    //Avoid side container to be removed
+    if(e.target.getAttribute("id") == "side-container" || e.target.parentNode.getAttribute("id") == "side-container"){
+        return false;
+    }
 
+    //CLICK INSIDE OF THE BIG HIERARCHY
     if(e.target.getAttribute('id') == "all-hierarchy"){
         e.preventDefault();
 
+        //Display correct target
         whoIsNewTarget = e.target;
-        buttonAddGrandParent.style.display = "block";
+        this.showOptions("allHierarchy");
 
         var left = e.pageX;
         var top = e.pageY;
         setPosition(top, left);
+        return false;
     }
 
-
-
-
-
-
-
-    if(e.target.classList.contains('patches-container')){
+    //CLICK INSIDE OF A GRANDPARENT
+    if(e.target.classList.contains('patches-container') || e.target.classList.contains('sub-hierarchy')){
         e.preventDefault();
 
-        whoIsNewTarget = e.target;
-        buttonAddParent.style.display = "block";
+        //Find the correct target
+        var getPatchesContainer = e.target;
+        if(e.target.classList.contains('sub-hierarchy')){
+            getPatchesContainer = e.target.querySelector(".patches-container");
+        }
 
+        //Display correct target
+        whoIsNewTarget = getPatchesContainer;
+        this.showOptions("patchesContainer");
 
         var left = e.pageX;
         var top = e.pageY;
-      
-      console.log(e.target);
-      setPosition(top, left);
-
+        setPosition(top, left);
+        return false;
     }
 
-    // class == patches-container
-    // class == dataparentbox
-    // class = itemHeading
+    //CLICK INSIDE OF A PARENT
+    if(e.target.classList.contains('dataparentbox')){
+        e.preventDefault();
 
-    // has == data-child-code attribute
-  
-  
- 
-  //
-  return false;
+        //Display correct target
+        whoIsNewTarget = e.target;
+        this.showOptions("dataParentBox");
+
+        var left = e.pageX;
+        var top = e.pageY;
+        setPosition(top, left);
+        return false;
+    }
+
+    //CLICK INSIDE OF A HEADING
+    if(e.target.classList.contains('itemHeading')){
+        e.preventDefault();
+
+        //Display correct target
+        whoIsNewTarget = e.target;
+        this.showOptions("itemHeading");
+
+        var left = e.pageX;
+        var top = e.pageY;
+        setPosition(top, left);
+        return false;
+    }
 
 });
 

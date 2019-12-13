@@ -22,16 +22,30 @@ var stylesCSS = {
     "transferEffect": "5px solid pink"
 }
 
+function animateEaseIn(elem){
+    elem.style.opacity = "0.3";
+    elem.style.transform = "scale(0.9)";
+}
+function animateEaseOut(elem){
+    elem.style.opacity = "1";
+    elem.style.transform = "scale(1)";
+}
+
+
+
 
 // ---------------------------------------------------------------------------- //
 
 /***************************************************
         MAIN FUNCTIONALITY FOR DRAG AND DROP
 ***************************************************/
+var oldTarget = "";
 
 //***** FUNCTIONALITY: SET THIS ELEMENT IS GOING TO BE DRAGGED *****//
 function dragStart(ev){
     ev.dataTransfer.setData("thisDataChild", ev.target.getAttribute('data-child-box'));
+    oldTarget = ev.target.parentNode;
+    animateEaseIn(ev.target);
 }
 
 //***** FUNCTIONALITY: PARENT RECEIVES ITEM TO BE DROPPED *****//
@@ -46,38 +60,42 @@ function drop(ev){
 
     //GET THE ELEMENT DROPPED
     var dataChildBox = ev.dataTransfer.getData("thisDataChild");
-    var draggedItem = document.querySelector("[data-child-box='" + dataChildBox +"'");
+    var draggedItem = oldTarget.querySelector("[data-child-box='" + dataChildBox +"'");
 
     //Set the container as its main target
     var whoIsTarget = whoIsThisTarget(ev.target);
 
-    //IF THIS DRAGGED ITEM IS A HEADER AND THE TARGET HAS A HEADER ALREADY
-    if(draggedItem.hasAttribute("data-child-header") && whoIsTarget.parentNode.getAttribute('id') != 'side-container'){
-        for(var i = 0; i < whoIsTarget.children.length; i++){
-            if(whoIsTarget.children[i].hasAttribute("data-child-header")){
-                allowDropHeader = false;
-                break;
+    //IF THE TARGET TO DROP IS ANOTHER CHILD, THE DROP WILL HAPPEN TWICE, MAKING SECOND DROP ITEM TO BE NULL.
+    if(draggedItem != null){
+
+        //IF THIS DRAGGED ITEM IS A HEADER AND THE TARGET HAS A HEADER ALREADY
+        if(draggedItem.hasAttribute("data-child-header") && whoIsTarget.parentNode.getAttribute('id') != 'side-container'){
+            for(var i = 0; i < whoIsTarget.children.length; i++){
+                if(whoIsTarget.children[i].hasAttribute("data-child-header")){
+                    allowDropHeader = false;
+                    break;
+                }
             }
         }
-    }
 
-    //PLACE THE DRAGGED ITEM INTO THE CONTAINER
-    if(allowDropHeader){
-        whoIsTarget.appendChild(draggedItem);
-        this.sortByAlphabet(whoIsTarget);
+        //PLACE THE DRAGGED ITEM INTO THE CONTAINER
+        if(allowDropHeader){
+            whoIsTarget.appendChild(draggedItem);
+            this.sortByAlphabet(whoIsTarget);
 
-    //IF THE ITEM CAN NOT BE DROPPED
-    }else{
+        //IF THE ITEM CAN NOT BE DROPPED
+        }else{
 
-        //Show error message if the actual header is different from what it is intended to drop. This discards error message for dropping same item in same box
-        if(whoIsTarget.children[0].getAttribute("data-child-header") != draggedItem.getAttribute("data-child-header")){
-            responseToUser.innerText = "You can't set two headers to same box";
-            responseToUser.style.display = 'block';
+            //Show error message if the actual header is different from what it is intended to drop. This discards error message for dropping same item in same box
+            if(whoIsTarget.children[0].getAttribute("data-child-header") != draggedItem.getAttribute("data-child-header")){
+                responseToUser.innerText = "You can't set two headers to same box";
+                responseToUser.style.display = 'block';
+            }
+
+            this.hoverOff(whoIsTarget);
         }
 
-        this.hoverOff(whoIsTarget);
     }
-    
 }
 
 //***** FUNCTIONALITY & STYLES: CHANGE COLOUR WHEN PASSING OVER *****//
@@ -86,7 +104,7 @@ function overDrop(ev){
 
     //Set the container as its main target
     var whoIsTarget = whoIsThisTarget(ev.target);
-    this.hoverOn(whoIsTarget);
+    this.hoverOn(whoIsTarget);    
 }
 
 //***** STYLES: CHANGE COLOUR WHEN PASSING AWAY *****//
@@ -103,6 +121,8 @@ function dragEnd(ev){
 
   let thisElement = ev.target;
   let thisElementParent = thisElement.parentNode;
+
+  animateEaseOut(ev.target);
 
   //Make parent default values
   this.hoverOff(thisElementParent);
@@ -125,6 +145,8 @@ function hoverOn(thisElement){
 function hoverOff(thisElement){
     thisElement.style.background = stylesCSS.bgParentBox;
     thisElement.style.border = stylesCSS.borderOff;
+    thisElement.style.transition = "0.1s"; //Improve animation effect
+
 
     if(thisElement.parentNode.id == "side-container"){
         thisElement.style.borderTopStyle = stylesCSS.borderTopSyleNone; 
@@ -136,6 +158,14 @@ function hoverOff(thisElement){
 ****************************************/
 function whoIsThisTarget(target){
     return (target.hasAttribute('draggable')) ? target.parentNode : target;
+}
+
+function doubleCheckTarget(target){
+    if((target.hasAttribute('draggable'))){
+        return 
+    }else{
+
+    }
 }
 
 function highlightTarget(element){
@@ -212,7 +242,7 @@ function sortByAlphabet(parent){
     //Go through the raw array
     for(var j = 0; j < rawArray.length; j++){
 
-        var thisChild = document.querySelector("[data-child-box='" + rawArray[j].dataChildBox + "']");
+        var thisChild = parent.querySelector("[data-child-box='" + rawArray[j].dataChildBox + "']");
 
         //If this child is a header
         if(thisChild.hasAttribute("data-child-header")){
