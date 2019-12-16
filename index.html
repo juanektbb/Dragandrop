@@ -25,10 +25,14 @@
 </div>
 
 <!-- MODAL WINDOW FOR ACCEPTING EXPORTING -->
-<div id="myModal" class="modal">
+<div id="modalConfirm" class="modal-bg">
     <div class="modal-content">
-        <div class="close">&times;</div>
-        <p>Some text in the Modal..</p>
+        <div id="xbuttonClose">
+            <img src="x.png">
+        </div>
+        <div class="modal-title">Confirmation</div>
+        <p>Your changes will restrict managers access to certain restaurant</p>
+        <button id="confirmStructure">Confirm this action</button>
     </div>
 </div>
 
@@ -96,6 +100,7 @@
 <script src="./scripts/construct.js"></script>
 <script src="./scripts/drandrop.js"></script>
 <script src="./scripts/listeners.js"></script>
+<script src="./scripts/rightclick.js"></script>
 
 </body>
 </html>
