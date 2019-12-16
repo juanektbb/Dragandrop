@@ -12,6 +12,7 @@ build: 3167
 
 var jsonBuilder = {};
 
+var theSideContainer = document.querySelector("#side-container .dataparentbox");
 
 
 /***************************
@@ -39,9 +40,9 @@ function hoverOn(thisElement){
     thisElement.style.border = stylesCSS.borderOn;
     thisElement.style.background = stylesCSS.bgHoverParentBox;
 
-    // if(thisElement.parentNode.id == "side-container"){
-    //      thisElement.style.borderTopStyle = stylesCSS.borderTopSyleNone; 
-    // }
+    if(thisElement.parentNode.id == "side-container"){
+         thisElement.style.borderTopStyle = stylesCSS.borderTopSyleNone; 
+    }
 }
 function hoverOff(thisElement){
     thisElement.style.background = stylesCSS.bgParentBox;

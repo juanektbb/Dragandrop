@@ -451,11 +451,30 @@ buttonDeleteParent.addEventListener("click", function(e){
 var buttonDuplicateHeading = document.getElementById("duplicateHeading");
 buttonDuplicateHeading.addEventListener("click", function(e){
     
-    var whereToAppend = document.querySelector("#side-container .dataparentbox");
+    var whereToAppend = theSideContainer;
     var newNodeHeading = whoIsNewTarget.cloneNode(true);
     whereToAppend.append(newNodeHeading);
 
+    sortByAlphabet(whereToAppend);
+    highlightTarget(newNodeHeading);
+
 });
+
+
+//BUTTON AND FUNCTIONALY FOR CLOSING A RESTAURANT
+var buttonCloseRestaurant = document.getElementById("closeRestaurant");
+buttonCloseRestaurant.addEventListener("click", function(e){
+    
+    //Personalized: Change the commented line below to append to the side container
+    var whereToAppend = document.querySelector("div[data-grandparent='100'] .dataparentbox");
+    // var whereToAppend = theSideContainer;
+    whereToAppend.append(whoIsNewTarget);
+
+    sortByAlphabet(whereToAppend);
+    highlightTarget(whoIsNewTarget);
+
+});
+
 
 
 /**************************************
@@ -506,15 +525,21 @@ function showOptions(type){
 
     }else if(type == "itemHeading"){
         buttonDuplicateHeading.style.display = "block";
+    
+    }else if(type == "dataChildBox"){
+        buttonCloseRestaurant.style.display = "block";
     }
+
 }
 
 //MAIN FUNCTION TO DETECT RIGHT CLICK
 var supercontiner = document.getElementsByClassName("supercontiner")[0];
 supercontiner.addEventListener("contextmenu", e => {
 
-    //Avoid side container to be removed
-    if(e.target.getAttribute("id") == "side-container" || e.target.parentNode.getAttribute("id") == "side-container"){
+    //Avoid any of these to be clickable
+    if(e.target.getAttribute("id") == "side-container" || e.target.parentNode.getAttribute("id") == "side-container" || e.target.classList.contains("supercontiner") || 
+       e.target.classList.contains("side-title") || e.target.classList.contains("chooseGrandParent") || e.target.classList.contains("addNewPatchContainer") || e.target.classList.contains("removeEmptyPatches")){
+        e.preventDefault();
         return false;
     }
 
@@ -576,6 +601,20 @@ supercontiner.addEventListener("contextmenu", e => {
         //Display correct target
         whoIsNewTarget = e.target;
         this.showOptions("itemHeading");
+
+        var left = e.pageX;
+        var top = e.pageY;
+        setPosition(top, left);
+        return false;
+    }
+
+    //CLICK INSIDE OF A CHILD
+    if(e.target.hasAttribute("data-child-code")){
+        e.preventDefault();
+
+        //Display correct target
+        whoIsNewTarget = e.target;
+        this.showOptions("dataChildBox");
 
         var left = e.pageX;
         var top = e.pageY;
