@@ -48,7 +48,7 @@ function buildJSON(){
     }
 
     console.log(jsonBuilder);
-    handledata(jsonBuilder);
+    // handledata(jsonBuilder);
 }
 
 
@@ -173,6 +173,3 @@ for(var i = 0; i < removeEmptyPatches.length; i++){
 buildJSON();
 
 
-document.getElementById("saveStructure").addEventListener("click", function(ev){
-    buildJSON();
-});
