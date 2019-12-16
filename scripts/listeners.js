@@ -170,6 +170,6 @@ for(var i = 0; i < removeEmptyPatches.length; i++){
 
 
 
-buildJSON();
+// buildJSON();
 
 

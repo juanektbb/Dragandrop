@@ -1,14 +1,8 @@
-//RAW DATA
 
-
-
-
-
-
-
-
-
-//PRE PROCESS DATA
+/*******************************************
+    PRE PROCESS DATA BEFORE CONSTRUCTION
+*******************************************/
+//CREATE SELECT DROP DOWN MENU
 var dropbox = document.getElementsByClassName("chooseGrandParent")[0];
 for(key in allGrandParents){
 
@@ -21,18 +15,6 @@ for(key in allGrandParents){
     dropbox.append(newOption);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /******************************************************
@@ -80,8 +62,6 @@ for(key in rawData){
 }
 
 
-/*************************************************************************************/
-
 /************************************************
     CONSTRUCT NODES USING THE SUPER STRUCTURE
 ************************************************/
@@ -93,7 +73,6 @@ for(keyGrandParent in superStructure){
     //Mark this grandparent has selected in the dropbox
     var thisDropbox = newGrandParent.querySelectorAll('.chooseGrandParent .gpn-' + keyGrandParent)[0];
     thisDropbox.setAttribute("selected", "selected");
-
 
     //Go through each parent for this grandparent                                                                                                                                                        
     for(keyParent in superStructure[keyGrandParent]){
@@ -127,10 +106,7 @@ for(keyGrandParent in superStructure){
     document.getElementById("all-hierarchy").append(newGrandParent);
 }
 
-
-/***************************************************
-    APPEND NULL CHILDREN INTO THE SIDE CONTAINER
-***************************************************/
+/***** APPEND NULL CHILDREN INTO THE SIDE CONTAINER *****/
 var sideContainer = document.getElementById("side-container");
 for(nullChild in nullChildren){;
 
@@ -144,7 +120,8 @@ for(nullChild in nullChildren){;
 }
 
 
-//Return a node clone of the given example requested
+
+//RETURN NEW NODE FROM THE TEMPLATES IN HTML
 function returnNewNode(id){
     var supportiveNode = document.getElementById(id);
     var newNode = supportiveNode.cloneNode(true);

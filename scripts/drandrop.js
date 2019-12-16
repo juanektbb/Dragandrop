@@ -26,7 +26,6 @@ var stylesCSS = {
     "borderTopSyleNone" : "none",
     "transferEffect": "5px solid pink"
 }
-
 function animateEaseIn(elem){
     elem.style.opacity = "0.3";
     elem.style.transform = "scale(0.9)";
@@ -35,7 +34,6 @@ function animateEaseOut(elem){
     elem.style.opacity = "1";
     elem.style.transform = "scale(1)";
 }
-
 function hoverOn(thisElement){
     thisElement.style.border = stylesCSS.borderOn;
     thisElement.style.background = stylesCSS.bgHoverParentBox;
