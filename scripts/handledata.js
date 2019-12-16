@@ -453,21 +453,25 @@ buttonDuplicateHeading.addEventListener("click", function(e){
     
     var whereToAppend = theSideContainer;
     var newNodeHeading = whoIsNewTarget.cloneNode(true);
+    newNodeHeading.classList.add("duplicatedParent");
     whereToAppend.append(newNodeHeading);
+
+    whereToAppend.parentNode.parentNode.parentNode.scrollIntoView({behavior: 'smooth'});
 
     sortByAlphabet(whereToAppend);
     highlightTarget(newNodeHeading);
 
 });
 
-
 //BUTTON AND FUNCTIONALY FOR CLOSING A RESTAURANT
 var buttonCloseRestaurant = document.getElementById("closeRestaurant");
 buttonCloseRestaurant.addEventListener("click", function(e){
     
-    //Personalized: Change the commented line below to append to the side container
+    //Personalized: Change the commented lines below to append to the side container and effect
     var whereToAppend = document.querySelector("div[data-grandparent='100'] .dataparentbox");
+    whereToAppend.parentNode.parentNode.scrollIntoView({behavior: 'smooth'});
     // var whereToAppend = theSideContainer;
+    // whereToAppend.parentNode.parentNode.parentNode.scrollIntoView({behavior: 'smooth'});
     whereToAppend.append(whoIsNewTarget);
 
     sortByAlphabet(whereToAppend);
@@ -476,12 +480,23 @@ buttonCloseRestaurant.addEventListener("click", function(e){
 });
 
 
+//BUTTON AND FUNCTIONALY FOR DELETING PARENT
+var buttonRemoveDuplicatedParent = document.getElementById("removeDuplicatedParent");
+buttonRemoveDuplicatedParent.addEventListener("click", function(e){
+    whoIsNewTarget.remove();
+});
+
 
 /**************************************
     VITAL MENU SUPPORTIVE FUNCTIONS
 **************************************/
 var menu = document.querySelector(".menu");
 let menuVisible = false;
+
+menu.addEventListener("contextmenu", e => {
+    e.preventDefault();
+    return false;
+});
 
 function toggleMenu(command) {
   menu.style.display = (command == "show") ? "block" : "none";
@@ -506,6 +521,7 @@ window.addEventListener("click", e => {
         RIGHT CLICK ON SCREEN FUNCTIONALITY
 **************************************************/
 function showOptions(type){
+
     //Hide all the options from the dropdown menu
     var menuOption = document.getElementsByClassName("menu-option");
     for(i = 0; i < menuOption.length; i++){
@@ -528,6 +544,10 @@ function showOptions(type){
     
     }else if(type == "dataChildBox"){
         buttonCloseRestaurant.style.display = "block";
+
+    }else if(type == "duplicatedParent"){
+        buttonDuplicateHeading.style.display = "block";
+        buttonRemoveDuplicatedParent.style.display = "block";
     }
 
 }
@@ -537,8 +557,8 @@ var supercontiner = document.getElementsByClassName("supercontiner")[0];
 supercontiner.addEventListener("contextmenu", e => {
 
     //Avoid any of these to be clickable
-    if(e.target.getAttribute("id") == "side-container" || e.target.parentNode.getAttribute("id") == "side-container" || e.target.classList.contains("supercontiner") || 
-       e.target.classList.contains("side-title") || e.target.classList.contains("chooseGrandParent") || e.target.classList.contains("addNewPatchContainer") || e.target.classList.contains("removeEmptyPatches")){
+    if(e.target.getAttribute("id") == "side-container" || e.target.parentNode.getAttribute("id") == "side-container" || e.target.classList.contains("supercontiner") || e.target.classList.contains("side-title") || 
+       e.target.classList.contains("chooseGrandParent") || e.target.classList.contains("addNewPatchContainer") || e.target.classList.contains("removeEmptyPatches")){
         e.preventDefault();
         return false;
     }
@@ -549,6 +569,7 @@ supercontiner.addEventListener("contextmenu", e => {
 
         //Display correct target
         whoIsNewTarget = e.target;
+        highlightTarget(whoIsNewTarget);
         this.showOptions("allHierarchy");
 
         var left = e.pageX;
@@ -563,8 +584,10 @@ supercontiner.addEventListener("contextmenu", e => {
 
         //Find the correct target
         var getPatchesContainer = e.target;
+        var animateSubHierarchy = e.target.parentNode;
         if(e.target.classList.contains('sub-hierarchy')){
             getPatchesContainer = e.target.querySelector(".patches-container");
+            animateSubHierarchy = e.target;
         }
         if(e.target.classList.contains('patches-header')){
             getPatchesContainer = e.target.parentNode.querySelector(".patches-container");
@@ -572,6 +595,7 @@ supercontiner.addEventListener("contextmenu", e => {
 
         //Display correct target
         whoIsNewTarget = getPatchesContainer;
+        highlightTarget(animateSubHierarchy);
         this.showOptions("patchesContainer");
 
         var left = e.pageX;
@@ -586,7 +610,23 @@ supercontiner.addEventListener("contextmenu", e => {
 
         //Display correct target
         whoIsNewTarget = e.target;
+        highlightTarget(whoIsNewTarget);
         this.showOptions("dataParentBox");
+
+        var left = e.pageX;
+        var top = e.pageY;
+        setPosition(top, left);
+        return false;
+    }
+
+    //CLICK INSIDE OF A DUPLICATED ELEMENT
+    if(e.target.classList.contains('duplicatedParent')){
+        e.preventDefault();
+
+        //Display correct target
+        whoIsNewTarget = e.target;
+        highlightTarget(whoIsNewTarget);
+        this.showOptions("duplicatedParent");
 
         var left = e.pageX;
         var top = e.pageY;
@@ -600,6 +640,7 @@ supercontiner.addEventListener("contextmenu", e => {
 
         //Display correct target
         whoIsNewTarget = e.target;
+        highlightTarget(whoIsNewTarget);
         this.showOptions("itemHeading");
 
         var left = e.pageX;
@@ -614,6 +655,7 @@ supercontiner.addEventListener("contextmenu", e => {
 
         //Display correct target
         whoIsNewTarget = e.target;
+        highlightTarget(whoIsNewTarget);
         this.showOptions("dataChildBox");
 
         var left = e.pageX;

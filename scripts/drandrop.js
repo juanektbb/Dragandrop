@@ -99,7 +99,6 @@ function drop(ev){
         //PLACE THE DRAGGED ITEM INTO THE CONTAINER
         if(allowDropHeader){
             whoIsTarget.appendChild(draggedItem);
-            this.sortByAlphabet(whoIsTarget);
 
         //IF THE ITEM CAN NOT BE DROPPED
         }else{
@@ -135,16 +134,23 @@ function leaveDrop(ev){
 
 //***** STYLES: CHANGE COLOUR BACK WHEN DROPPING *****//
 function dragEnd(ev){
-  let thisElement = ev.target;
-  let thisElementParent = thisElement.parentNode;
+    let thisElement = ev.target;
+    let thisElementParent = thisElement.parentNode;
 
-  animateEaseOut(ev.target);
+    animateEaseOut(ev.target);
 
-  //Make parent default values
-  this.hoverOff(thisElementParent);
+    //Make parent default values
+    this.hoverOff(thisElementParent);
+    this.sortByAlphabet(thisElementParent);
 
-  this.highlightTarget(thisElementParent);
-  this.highlightTarget(thisElement);
+    //If this is the side container, improve highlight
+    if(theSideContainer != thisElementParent){
+        this.highlightTarget(thisElementParent);
+    }else{
+        this.highlightTarget(thisElementParent.parentNode.parentNode);
+    }
+
+    this.highlightTarget(thisElement);
 }
 
 // ---------------------------------------------------------------------------- //
@@ -251,7 +257,24 @@ function sortByAlphabet(parent){
 
         //If this child is a header
         if(thisChild.hasAttribute("data-child-header")){
-            headersArray.push(thisChild);
+
+            //Find if this parent heading is repeated -> Improves side container
+            var repeatedParent = parent.querySelectorAll("[data-child-box='" + rawArray[j].dataChildBox + "']");
+            if(repeatedParent.length >= 2){
+
+                //Append each of these repeated parents
+                for(var k = 0; k < repeatedParent.length; k++){
+                    headersArray.push(repeatedParent[k]);
+                }
+
+                //Manipulates the index as repeated items are complete
+                j = j + k - 1;
+                
+            //If not repeated items, push to array as normal
+            }else{
+                headersArray.push(thisChild);
+            }
+
             continue;
         }
 
@@ -259,6 +282,8 @@ function sortByAlphabet(parent){
         newParent.appendChild(thisChild);
 
     }
+
+    // console.log(rawArray);
 
     //Empty the old parent
     parent.innerHTML = '';

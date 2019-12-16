@@ -105,9 +105,9 @@ body{
     display: block;
 }
 .addNewPatchContainer{
-    background-color: #fff;
+    background-color: transparent;
     border: 1px solid #fff;
-    color: #6474AF;
+    color: #fff;
     font-size: 11px;
     outline: none;
     cursor: pointer;
@@ -117,8 +117,8 @@ body{
     max-width: 80px;
 }
 .addNewPatchContainer:hover{
-    background-color: #e2f7d5;
-    border-color: #e2f7d5;
+    background-color: #fff;
+    color: #6474AF;
 }
 .removeEmptyPatches{
     background-color: transparent;
@@ -133,8 +133,7 @@ body{
     max-width: 80px;
 }
 .removeEmptyPatches:hover{
-    background-color: #ffcccc;
-    border-color: #ffcccc;
+    background-color: #fff;
     color: #6474AF;
 }
 
@@ -238,6 +237,9 @@ body{
     margin: 5px auto;
     width: 210px;
     min-width: 210px;
+}
+.side-container .dataparentbox div[draggable]:first-child{
+    margin-top: 2px;
 }
 
 
