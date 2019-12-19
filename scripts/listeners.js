@@ -1,3 +1,11 @@
+/**************************************
+Copyright (c) 2019, Juan D. Diaz
+https://github.com/juanektbb/Dragandrop
+
+Open Source Code - Enjoy it ;)
+version: 1.0.0
+**************************************/
+
 /****************************
     JSON BUILDER FUNCTION
 ****************************/
@@ -47,15 +55,8 @@ function buildJSON(){
         }
     }
 
-    console.log(jsonBuilder);
-    // handledata(jsonBuilder);
+    return jsonBuilder;
 }
-
-
-
-
-
-
 
 
 /***************************************
@@ -153,23 +154,47 @@ for(var i = 0; i < removeEmptyPatches.length; i++){
 }
 
 
+/*****************************************
+        CONFIRMATION EXPORT WINDOW
+*****************************************/
+var modalBg = document.getElementById("modalConfirm");
+var xbuttonClose = document.getElementById("xbuttonClose");
+var buttonSaveStructure = document.getElementById("saveStructure");
+var buttonConfirmStructure = document.getElementById("confirmStructure");
 
+//Open modal window
+buttonSaveStructure.onclick = function(){
+  modalBg.style.display = "block";
+}
 
+//Close modal by using x 
+xbuttonClose.onclick = function(){
+    modalBg.style.display = "none";
+}
 
+//Close modal by clicking outside
+window.onclick = function(event){
+    if(event.target == modalBg){
+        modalBg.style.display = "none";
+    }
+}
 
+//Confirm button is clicked
+buttonConfirmStructure.onclick = function(){
+    var newJSON = buildJSON();
+    handledata(newJSON);
+    modalBg.style.display = "none";
+}
 
+//MANIPULATE FINAL JSON
+function handledata(json_data){
 
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "endpoint.php", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(json_data);
 
+    console.log(json_data);
+    //location.reload();
 
-
-
-
-
-
-
-
-
-
-// buildJSON();
-
-
+}

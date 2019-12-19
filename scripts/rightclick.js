@@ -1,19 +1,34 @@
-/****************************************************************
-        BUTTONS AND FUNCTIONALY FOR EVERY ELEMENT OF MENU
-****************************************************************/
+/**************************************
+Copyright (c) 2019, Juan D. Diaz
+https://github.com/juanektbb/Dragandrop
+
+Open Source Code - Enjoy it ;)
+version: 1.0.0
+**************************************/
+
+/******************************************************************
+        BUTTONS AND FUNCTIONALITY FOR EVERY ELEMENT OF MENU
+******************************************************************/
 var whoIsNewTarget = null;
 
-//Create new member of the family
+//Create new member of the family at the beginning
 function appendNewFamilyMember(whichSupport){
     var familyMember = returnNewNode(whichSupport);
     whoIsNewTarget.append(familyMember);
     return familyMember;
 }
 
+//Create new member of the family at end
+function prependNewFamilyMember(whichSupport){
+    var familyMember = returnNewNode(whichSupport);
+    whoIsNewTarget.prepend(familyMember);
+    return familyMember;
+}
+
 //BUTTON AND FUNCTIONALY FOR ADDING GRANDPARENT
 var buttonAddGrandParent = document.getElementById("addGrandParent");
 buttonAddGrandParent.addEventListener("click", function(e){
-    var theNewGrandParent = appendNewFamilyMember("grandParentSupport");
+    var theNewGrandParent = prependNewFamilyMember("grandParentSupport");
 
     //CREATE LISTENERS FOR EVERY BUTTON OF THE GRANDPARENT
     var thisSelectElem = theNewGrandParent.querySelector(".chooseGrandParent");
@@ -47,7 +62,7 @@ buttonDeleteGrandParent.addEventListener("click", function(e){
 
     //If the grandparent was not empty
     if(!bool){
-        createResponse("You can't remove this grandparent if still has data in it");
+        createResponse(errorOne);
     }else{
         whoIsNewTarget.parentNode.remove();
     }
@@ -59,7 +74,7 @@ buttonDeleteParent.addEventListener("click", function(e){
 
     //If this parent was not empty
     if(whoIsNewTarget.children.length > 0){
-        createResponse("You can't remove this parent if still has data in it");
+        createResponse(errorTwo);
     }else{
         whoIsNewTarget.remove();
     }
@@ -175,19 +190,28 @@ var supercontiner = document.getElementsByClassName("supercontiner")[0];
 supercontiner.addEventListener("contextmenu", e => {
 
     //Avoid any of these to be clickable
-    if(e.target.getAttribute("id") == "side-container" || e.target.parentNode.getAttribute("id") == "side-container" || e.target.classList.contains("supercontiner") || e.target.classList.contains("side-title") || 
+    if(e.target.getAttribute("id") == "side-container" || e.target.parentNode.getAttribute("id") == "side-container" || e.target.classList.contains("side-title") || 
        e.target.classList.contains("chooseGrandParent") || e.target.classList.contains("addNewPatchContainer") || e.target.classList.contains("removeEmptyPatches")){
         e.preventDefault();
         return false;
     }
 
     //CLICK INSIDE OF THE BIG HIERARCHY
-    if(e.target.getAttribute('id') == "all-hierarchy"){
+    if(e.target.getAttribute('id') == "all-hierarchy" || e.target.classList.contains("supercontiner")){
         e.preventDefault();
 
         //Display correct target
         whoIsNewTarget = e.target;
-        highlightTarget(whoIsNewTarget);
+
+        //Change the hightlight and target
+        if(e.target.classList.contains("supercontiner")){
+            whoIsNewTarget = document.getElementById("all-hierarchy");
+            highlightTarget(e.target);
+        }else{
+            var thisHightlight = document.getElementsByClassName("supercontiner")[0];
+            highlightTarget(thisHightlight);
+        }
+
         this.showOptions("allHierarchy");
 
         var left = e.pageX;

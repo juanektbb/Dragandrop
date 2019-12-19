@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Drandrop.js</title>
+    <meta charset="UTF-8">
 
-<title>Drandrop.js</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles.css" />
-<link rel="shortcut icon" type="image/png" href="./favicon.png"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-
+    <script src="./scripts/handledata.js"></script>
 </head>
 <body>
 
@@ -28,32 +29,13 @@
 <div id="modalConfirm" class="modal-bg">
     <div class="modal-content">
         <div id="xbuttonClose">
-            <img src="x.png">
+            <img src="./images/x.png">
         </div>
         <div class="modal-title">Confirmation</div>
-        <p>Your changes will restrict managers access to certain restaurant</p>
+        <p>Your changes will restrict managers access to certain regions, areas and/or restaurant</p>
         <button id="confirmStructure">Confirm this action</button>
     </div>
 </div>
-
-
-<div id="save-changes">
-    <button id="saveStructure">Save Structure</button>
-</div>
-
-<div id="responseToUser"></div>
-
-
-<!---
-
-    data-child-box -> It contains the actual data shown in the box (Restaurant name or Manager name). It is also useful for alphabetic order or both (not as unique keys)
-
-    data-child-header -> It contains the ID of the manager (Unique field)
-    data-child-code -> It contains the ID of the restaurant (Unique field)
-
---->
-
-
 
 <!-- HIDDEN SUPPORTIVE GRANDPARENT -->
 <div class="sub-hierarchy " id="grandParentSupport">
@@ -78,24 +60,37 @@
 <div data-child-box="" data-child-code="" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)" id="childSupport"></div>
 
 
-<!-- SUPER CONTAINER TO HOLD THE APPLICATION -->
-<div class="supercontiner">
+<!-- VISIBLE CONTENT STARTS HERE -->
+<h1>Drandrop.js</h1>
 
-    <!-- MAIN CONTAINER -->
-    <div id="all-hierarchy"></div>
+<article>
 
-    <!-- SIDE CONTAINER -->
-    <div id="all-side">
-        <div class="side-title">Not classified</div>
-        <div class="side-container" id="side-container">
-            <div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+    <!-- HEADER OF THE PAGE -->
+    <div id="save-changes">
+        <button id="saveStructure">Save Structure</button>
+    </div>
+    <div id="responseToUser"></div>
+
+    <!-- SUPER CONTAINER TO HOLD THE APPLICATION -->
+    <div class="supercontiner">
+
+        <!-- MAIN CONTAINER -->
+        <div id="all-hierarchy"></div>
+
+        <!-- SIDE CONTAINER -->
+        <div id="all-side">
+            <div class="side-title">Not classified</div>
+            <div class="side-container" id="side-container">
+                <div class="dataparentbox" ondrop="drop(event)" ondragover="overDrop(event)" ondragleave="leaveDrop(event)"></div>
+            </div>
         </div>
+
     </div>
 
-</div>
+</article>
 
 <!-- INCLUDING ALL THE SCRIPTS FOR FUNCTIONING -->
-<script src="./scripts/handledata.js"></script>
+<script src="./scripts/helper.js"></script>
 <script src="./scripts/construct.js"></script>
 <script src="./scripts/drandrop.js"></script>
 <script src="./scripts/listeners.js"></script>

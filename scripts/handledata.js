@@ -1,203 +1,197 @@
-//RAW DATA
+/**************************************
+Copyright (c) 2019, Juan D. Diaz
+https://github.com/juanektbb/Dragandrop
 
+Open Source Code - Enjoy it ;)
+version: 1.0.0
+**************************************/
 
-
-
-
-
+//RAW DATA - GRANDPARENTS
 var allGrandParents = {
-    "3":"Senait Asmerom",
-    "6":"Ralph Chapman",
-    "12":"Tracey Evans",
-    "13":"Carley O Neill",
-    "17":"Craig Hodgson",
-    "19":"Laura Adams",
-    "20":"Linda Marshall",
-    "22":"Rupi Darar",
-    "34":"Mike Cody",
-    "36":"Tommy McGee",
-    "40":"Sarah Jamieson",
-    "43":"Ian Penny",
-    "44":"Andy Thomas",
-    "45":"Sajjad Ahmed",
-    "46":"Dan Standish",
-    "47":"Andy Stokes",
-    "48":"Adiyam",
-    "49":"Ralph Chapman",
-    "50":"Saman Darar",
-    "51":"Hannah",
-    "52":"Chris Hayward",
-    "53":"Liz Carlton",
-    "54":"Roshni Durgai",
-    "55":"Peter Denison",
-    "56":"Shevourne Hall",
-    "57":"Annmarie Sayers",
-    "58":"Amit Chander",
-    "59":"Abid Hussain",
-    "60":"Darren Walsh",
-    "61":"Girish Ayyanna",
+    "3":"Rizwan Joseph",
+    "6":"Taylan Dodd",
+    "12":"Keri Ramsey",
+    "13":"Ami Sykes",
+    "17":"Ruby-Mae Lovell",
+    "19":"Willard Drake",
+    "20":"Eli Cornish",
+    "34":"Otis Chadwick",
+    "40":"Nataniel Britton",
+    "43":"Tonicha Osborne",
+    "44":"Sultan Kearney",
+    "45":"Mared Torres",
+    "46":"Richard Mahoney",
+    "47":"Hadiqa Mccoy",
+    "49":"Fox Hodge",
+    "50":"Mira Hobbs",
+    "52":"Kavan Branch",
+    "53":"Ailish Conroy",
+    "55":"Mariana Salinas",
+    "57":"Cleveland Greaves",
+    "58":"Arabella Solomon",
+    "59":"Ayana Craig",
+    "60":"Nour Wharton",
+    "61":"Vivian Robertson",
     "100":"Closed"
 }
 
+//RAW DATA - PARENTS
 var allParents = {
-    "3":"Senait Asmerom",
-    "12":"Tracey Evans",
-    "13":"Carley O Neill",
-    "17":"Craig Hodgson",
-    "19":"Laura Adams",
-    "20":"Linda Marshall",
-    "22":"Rupi Darar",
-    "34":"Mike Cody",
-    "36":"Tommy McGee",
-    "40":"Sarah Jamieson",
-    "43":"Ian Penny",
-    "44":"Andy Thomas",
-    "45":"Sajjad Ahmed",
-    "46":"Dan Standish",
-    "47":"Andy Stokes",
-    "48":"Adiyam",
-    "49":"Ralph Chapman",
-    "50":"Saman Darar",
-    "51":"Hannah",
-    "52":"Chris Hayward",
-    "53":"Liz Carlton",
-    "54":"Roshni Durgai",
-    "55":"Peter Denison",
-    "56":"Shevourne Hall",
-    "57":"Annmarie Sayers",
-    "58":"Amit Chander",
-    "59":"Abid Hussain",
-    "60":"Darren Walsh",
-    "61":"Girish Ayyanna",
+    "3":"Rizwan Joseph",
+    "6":"Taylan Dodd",
+    "12":"Keri Ramsey",
+    "13":"Ami Sykes",
+    "17":"Ruby-Mae Lovell",
+    "19":"Willard Drake",
+    "20":"Eli Cornish",
+    "34":"Otis Chadwick",
+    "40":"Nataniel Britton",
+    "43":"Tonicha Osborne",
+    "44":"Sultan Kearney",
+    "45":"Mared Torres",
+    "46":"Richard Mahoney",
+    "47":"Hadiqa Mccoy",
+    "49":"Fox Hodge",
+    "50":"Mira Hobbs",
+    "52":"Kavan Branch",
+    "53":"Ailish Conroy",
+    "55":"Mariana Salinas",
+    "57":"Cleveland Greaves",
+    "58":"Arabella Solomon",
+    "59":"Ayana Craig",
+    "60":"Nour Wharton",
+    "61":"Vivian Robertson",
     "100":"Closed"
 }
 
+//RAW DATA - CHILDREN
 var allChildren = {
-    "6366":"Stevenage",
-    "6663":"Manchester Piccadilly",
-    "6664":"Leeds",
-    "6673":"Gateshead",
-    "6750":"Newcastle",
-    "6761":"Gloucester Road",
-    "6822":"Hemel Hempstead",
-    "7363":"Thorpe Park 1",
-    "7393":"Liverpool Lord St",
-    "7640":"Liverpool Ranelagh",
-    "7642":"Enfield",
-    "7646":"Chester",
-    "7712":"Uxbridge",
-    "7761":"Darlington",
-    "7905":"Perry Barr",
-    "8021":"Coventry",
-    "8330":"Liverpool EPR",
-    "8372":"Blackburn",
-    "8373":"Manchester Fallowfields",
-    "8781":"Bolton",
-    "8782":"Park Royal",
-    "8802":"York",
-    "8903":"Derby",
-    "8950":"Letchworth",
-    "8951":"Thorpe Park 2",
-    "10001":"SS Leeds Merrion",
-    "10002":"SS Farnborough",
-    "10003":"SS Harlow Town Centre",
-    "10744":"Feltham",
-    "11539":"Bexleyheath",
-    "11662":"Wigan",
-    "12319":"Winwick Quay",
-    "12645":"Liverpool Queen Sq",
-    "12738":"Cheshire Oaks",
-    "12808":"Lowry Centre",
-    "13050":"Grimsby",
-    "13124":"Harlow Town Centre",
-    "13157":"Peterborough",
-    "13267":"Sheffield",
-    "13443":"St Helens",
-    "13515":"Rotherham",
-    "13670":"Wood Green",
-    "13808":"Harrow St Annes",
-    "13831":"Stockton",
-    "14005":"Preston",
-    "14133":"Yeading",
-    "14489":"Wakefield",
-    "14780":"Kingsway",
-    "17506":"Hanley",
-    "17548":"Clacton",
-    "17671":"Hull St Stephens",
-    "18278":"Trafford Centre",
-    "18660":"Burton-on-Trent",
-    "18932":"Leicester",
-    "19008":"Macclesfield",
-    "19009":"Bury",
-    "19010":"Talke Point",
-    "19011":"Peterborough Queensgate",
-    "19085":"Twickenham",
-    "19559":"Great Yarmouth",
-    "19645":"Skegness",
-    "19744":"Bury St Edmunds",
-    "19975":"Hull Prospect",
-    "20037":"Doncaster Frenchgate",
-    "20038":"Wakefield Trinity",
-    "20050":"Leicester Haymarket",
-    "20354":"Llanelli",
-    "20368":"Carmarthen",
-    "20857":"Bangor",
-    "20952":"Banbury",
-    "21181":"Redditch",
-    "21215":"Runcorn",
-    "21335":"Blackpool",
-    "21336":"Bridlington",
-    "21517":"Shrewsbury",
-    "21703":"Huddersfield Packhorse",
-    "21780":"North Shields",
-    "21922":"Bradford",
-    "22004":"Nottingham",
-    "22178":"Lincoln BK",
-    "22275":"Port Talbot",
-    "22276":"Sheffield Parkway",
-    "22279":"Nottingham CB",
-    "22281":"Dudley",
-    "22315":"South Shields",
-    "22339":"Bootle",
-    "22340":"Gillingham",
-    "22341":"Hinckley",
-    "22614":"Wolverhampton",
-    "22925":"Morecambe",
-    "22928":"West Brom",
-    "23217":"Wallsend",
-    "23218":"Sandiacre",
-    "23545":"Preston St George",
-    "23553":"Blackburn The Mall",
-    "23778":"Hounslow Treaty Centre",
-    "23936":"Leeds Merrion",
-    "29001":"Hounslow Telepizza",
-    "40001":"RC Blackpool",
-    "40002":"RC Hull Prospect",
-    "50001":"ROO Blackpool",
-    "50002":"ROO Hull Prospect",
-    "50004":"ROO West Brom",
-    "50005":"ROO Wolverhampton",
-    "60001":"ETL Blackburn",
-    "60002":"ETL Blackpool",
-    "60003":"ETL Huddersfield",
-    "60004":"ETL Hull St Stephens",
-    "60005":"ETL Hull Prospect",
-    "60007":"ETL Redditch",
-    "60008":"ETL West Brom",
-    "60009":"ETL Wolverhampton",
-    "80003":"Lincoln CI",
-    "9999998":"Crust",
-    "25424":"Walsall",
-    "25563":"Huddersfield Leeds Road",
-    "10004":"SS Thorpe Park",
-    "90001":"DD Hull Prospect",
-    "50006":"ROO Huddersfield Packhorse",
-    "70001":"Clacton Just Spuds",
-    "40004":"RC West Brom",
-    "60010":"ETL Leeds Merrion",
-    "60011":"ETL Farnborough"
+    "6366":"Peterborough",
+    "6663":"Cleobury Mortimer",
+    "6664":"Cleckheaton",
+    "6673":"Chatham",
+    "6750":"Budleigh Salterton",
+    "6761":"Bosworth",
+    "6822":"Rothwell",
+    "7363":"Penryn",
+    "7393":"Petersfield",
+    "7640":"Buckingham",
+    "7642":"Bridport",
+    "7646":"Scar",
+    "7712":"Eye",
+    "7761":"Marl",
+    "7905":"Mildenhall",
+    "8021":"Ashford",
+    "8330":"Royston",
+    "8372":"Haslemere",
+    "8373":"Ashbourne",
+    "8781":"Kingston upon Hull",
+    "8782":"York",
+    "8802":"Chipping Campden",
+    "8903":"Harlow",
+    "8950":"Hetton",
+    "8951":"Aylsham",
+    "10001":"Hungerford",
+    "10002":"Alnwick",
+    "10003":"Torpoint",
+    "10744":"Winslow",
+    "11539":"Lisburn",
+    "11662":"Syston",
+    "12319":"Tipton",
+    "12645":"West Ham",
+    "12738":"Uttoxeter",
+    "12808":"Wigan",
+    "13050":"Faringdon",
+    "13124":"Holbeach",
+    "13157":"Chorleywood",
+    "13267":"Featherstone",
+    "13443":"Horsham",
+    "13515":"Grimsby",
+    "13670":"Keynsham",
+    "13808":"Preston",
+    "13831":"Manchester",
+    "14005":"Rugby",
+    "14133":"Settle",
+    "14489":"Eton",
+    "14780":"Southam",
+    "17506":"South",
+    "17548":"Midsomer Norton",
+    "17671":"Stoke-on-Trent",
+    "18278":"Coggeshall",
+    "18660":"Newport Pagnell",
+    "18932":"Beaminster",
+    "19008":"Burnham-on-Sea",
+    "19009":"Winchester",
+    "19010":"Chickerell",
+    "19011":"Newton Aycliffe",
+    "19085":"Brading",
+    "19559":"Blackburn",
+    "19645":"Kirkby Stephen",
+    "19744":"Irthling",
+    "19975":"Southwick",
+    "20037":"Congleton",
+    "20038":"Wallingford",
+    "20050":"Twickenham",
+    "20354":"Biddulph",
+    "20368":"Burnham-on-Crouch",
+    "20857":"Bootle",
+    "20952":"Hoddesdon",
+    "21181":"Eastbourne",
+    "21215":"Fordwich",
+    "21335":"Ashton-under-Lyne",
+    "21336":"Olney",
+    "21517":"Corsham",
+    "21703":"Tadley",
+    "21780":"Belper",
+    "21922":"Bath",
+    "22004":"Felixstowe",
+    "22178":"Burnley",
+    "22275":"Southport",
+    "22276":"Tewkesbury",
+    "22279":"Berkeley",
+    "22281":"Billericay",
+    "22315":"Helston",
+    "22339":"Normanton",
+    "22340":"Swanley",
+    "22341":"Morley",
+    "22614":"Woodbridge",
+    "22925":"Halesowen",
+    "22928":"Redcar",
+    "23217":"Rochester",
+    "23218":"Wareham",
+    "23545":"Hunstanton",
+    "23553":"Wednesbury",
+    "23778":"Great Dunmow",
+    "23936":"Dalton Town with Newton",
+    "29001":"Shirebrook",
+    "40001":"Dinnington St Johns",
+    "40002":"South Kirkby and Moorthorpe",
+    "50001":"Cramrichsea",
+    "50002":"Sladedid Upon Bextotnesquay",
+    "50004":"St Littver",
+    "50005":"Bridsitun",
+    "60001":"New Shepshedbou",
+    "60002":"St Charlter Under Barhea",
+    "60003":"Bridattninch",
+    "60004":"Mercle Under Lingstongates",
+    "60005":"Stonerdingchipp",
+    "60007":"Stonemortownley",
+    "60008":"South Brivernque",
+    "60009":"East Berghsoustocks",
+    "80003":"Porth",
+    "9999998":"Gahen",
+    "25424":"Framsen",
+    "25563":"South Mirchaxe",
+    "10004":"Slingport",
+    "90001":"Bewdtra",
+    "50006":"North Bath",
+    "70001":"East Camstock-In-Smerelyd",
+    "40004":"Otrkbyton",
+    "60010":"Royal Rdenrom",
+    "60011":"Bridsandster"
 }
 
+//RAW DATA - RELATIONS
 var rawData = {
     "6366":{"parentNode":"61","grandParentNode":"52"},
     "6663":{"parentNode":"13","grandParentNode":"50"},
@@ -323,80 +317,3 @@ var rawData = {
     "60010":{"parentNode":"100","grandParentNode":"100"},
     "60011":{"parentNode":"100","grandParentNode":"100"}
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Get the modal
-var modalBg = document.getElementById("modalConfirm");
-var xbuttonClose = document.getElementById("xbuttonClose");
-
-
-var buttonSaveStructure = document.getElementById("saveStructure");
-var buttonConfirmStructure = document.getElementById("confirmStructure");
-
-
-// When the user clicks on the button, open the modal
-buttonSaveStructure.onclick = function(){
-  modalBg.style.display = "block";
-}
-
-//Close modal by using x 
-xbuttonClose.onclick = function(){
-    modalBg.style.display = "none";
-}
-
-//Close modal by clicking outside
-window.onclick = function(event){
-    if(event.target == modalBg){
-        modalBg.style.display = "none";
-    }
-}
-
-
-
-
-// function handledata(json_data){
-
-//     var xhr = new XMLHttpRequest();
-//     xhr.open("POST", "jsontodb.php", true);
-//     xhr.setRequestHeader('Content-Type', 'application/json');
-//     xhr.send(json_data);
-
-//     console.log(xhr.status);
-
-//     // location.reload();
-// }
-
-
-buttonConfirmStructure.onclick = function() {
-    buildJSON();
-}

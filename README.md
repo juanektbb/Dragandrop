@@ -1,5 +1,11 @@
 # Dragandrop
 
+    data-child-box -> It contains the actual data shown in the box (Restaurant name or Manager name). It is also useful for alphabetic order or both (not as unique keys)
+
+    data-child-header -> It contains the ID of the manager (Unique field)
+    data-child-code -> It contains the ID of the restaurant (Unique field)
+
+
 ```
 <div class="sub-hierarchy">
   <div class="patches-header">
@@ -39,3 +45,7 @@
 
 
  
+
+
+
+

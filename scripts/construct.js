@@ -1,3 +1,10 @@
+/**************************************
+Copyright (c) 2019, Juan D. Diaz
+https://github.com/juanektbb/Dragandrop
+
+Open Source Code - Enjoy it ;)
+version: 1.0.0
+**************************************/
 
 /*******************************************
     PRE PROCESS DATA BEFORE CONSTRUCTION
@@ -112,6 +119,7 @@ for(keyGrandParent in superStructure){
     document.getElementById("all-hierarchy").append(newGrandParent);
 }
 
+
 /***** APPEND NULL CHILDREN INTO THE SIDE CONTAINER *****/
 var sideContainer = document.getElementById("side-container");
 for(nullChild in nullChildren){
@@ -135,14 +143,4 @@ for(thisParent in unusedParent){
     newManager.setAttribute("data-child-header", thisParent);
     sideContainer.querySelectorAll('.dataparentbox')[0].append(newManager);
 
-}
-
-
-
-//RETURN NEW NODE FROM THE TEMPLATES IN HTML
-function returnNewNode(id){
-    var supportiveNode = document.getElementById(id);
-    var newNode = supportiveNode.cloneNode(true);
-    newNode.removeAttribute('id');
-    return newNode;
 }
