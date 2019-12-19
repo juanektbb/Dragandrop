@@ -59,6 +59,7 @@ function hoverOff(thisElement){
         MAIN FUNCTIONALITY FOR DRAG AND DROP
 ***************************************************/
 var oldTarget = "";
+var preventBug = true;
 
 //***** FUNCTIONALITY: SET THIS ELEMENT IS GOING TO BE DRAGGED *****//
 function dragStart(ev){
@@ -77,6 +78,14 @@ function drop(ev){
     //GET THE ELEMENT DROPPED
     var dataChildBox = ev.dataTransfer.getData("thisDataChild");
     var draggedItem = oldTarget.querySelector("[data-child-box='" + dataChildBox +"'");
+
+    //AMAZING LOGIC -> Dropping on a draggable will execute twice, this function changes boolean to prevent it
+    if(ev.target.hasAttribute('draggable')){
+        if(preventBug){
+            preventBug = false;
+            return false;
+        }
+    }
 
     //Set the container as its main target
     var whoIsTarget = whoIsThisTarget(ev.target);
@@ -104,12 +113,15 @@ function drop(ev){
             //Show error message if the actual header is different from what it is intended to drop. This discards error message for dropping same item in same box
             if(whoIsTarget.children[0].getAttribute("data-child-header") != draggedItem.getAttribute("data-child-header")){
                 this.createResponse("You can't set two headers to same box");
+                console.log("once")
             }
 
             this.hoverOff(whoIsTarget);
         }
 
     }
+
+    preventBug = true;
 }
 
 //***** FUNCTIONALITY & STYLES: CHANGE COLOUR WHEN PASSING OVER *****//

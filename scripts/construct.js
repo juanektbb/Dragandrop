@@ -23,6 +23,7 @@ for(key in allGrandParents){
 //superStructure[grandParent][parent] = [child, child, child]
 var superStructure = [];
 var nullChildren = [];
+var unusedParent = Object.assign({}, allParents);
 
 //GO THROUGH THE RAW JSON DATA TO CONSTRUCT DATA STRUCTURE
 for(key in rawData){
@@ -53,6 +54,11 @@ for(key in rawData){
         //Else create a key for parent in superStructure[grandparent]
         }else{
             superStructure[rawData[key].grandParentNode][rawData[key].parentNode] = [];
+
+            //Remove this parent from the used ones JSON
+            if(rawData[key].parentNode in unusedParent){
+               delete unusedParent[rawData[key].parentNode];
+            }
         }
 
     }
@@ -108,7 +114,7 @@ for(keyGrandParent in superStructure){
 
 /***** APPEND NULL CHILDREN INTO THE SIDE CONTAINER *****/
 var sideContainer = document.getElementById("side-container");
-for(nullChild in nullChildren){;
+for(nullChild in nullChildren){
 
     //Create a child container and place its data in it
     var newChild = returnNewNode("childSupport");
@@ -116,6 +122,18 @@ for(nullChild in nullChildren){;
     newChild.setAttribute("data-child-box", allChildren[nullChildren[nullChild]]);
     newChild.setAttribute("data-child-code", nullChildren[nullChild]);
     sideContainer.querySelectorAll('.dataparentbox')[0].append(newChild);
+
+}
+
+/***** APPEND UNUSED PARENTS INTO THE SIDE CONTAINER *****/
+for(thisParent in unusedParent){
+
+    //Create a manager container and place its data in it
+    var newManager = returnNewNode("managerSupport");
+
+    newManager.setAttribute("data-child-box", unusedParent[thisParent]);
+    newManager.setAttribute("data-child-header", thisParent);
+    sideContainer.querySelectorAll('.dataparentbox')[0].append(newManager);
 
 }
 
